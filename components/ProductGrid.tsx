@@ -36,14 +36,16 @@ export function ProductGrid({ compact = false }: ProductGridProps) {
             whileHover={{ y: -6 }}
             className="group overflow-hidden rounded-3xl border border-espresso/10 bg-white/75 shadow-soft"
           >
-            <div className="relative h-80 overflow-hidden bg-beige/45 p-4">
-              <Image
-                src={product.image}
-                alt={product.name[language]}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain p-4 transition duration-700 group-hover:scale-[1.03]"
-              />
+            <div className="bg-beige/25 px-5 py-5 sm:px-8">
+              <div className="relative mx-auto aspect-[3/4] w-full max-w-[300px] overflow-hidden rounded-2xl bg-white shadow-soft sm:max-w-[340px]">
+                <Image
+                  src={product.image}
+                  alt={product.name[language]}
+                  fill
+                  sizes="(max-width: 768px) 82vw, 340px"
+                  className="object-contain transition duration-700 group-hover:scale-[1.02]"
+                />
+              </div>
             </div>
 
             <div className="space-y-4 p-6">

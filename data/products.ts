@@ -10,59 +10,59 @@ export type CoffeeProduct = {
 
 export const coffeeProducts: CoffeeProduct[] = [
   {
-    id: "cafe-negro",
-    name: "Cafe Negro",
-    image: "/products/cafe-negro-pack.jpg",
+    id: "nescafe-clasico",
+    name: "Nescafé Clásico",
+    image: "/products/nescafe-clasico.png",
     shortDescription:
-      "Strong smooth coffee for busy mornings or work afternoons.",
-    flavorNotes: ["Strong coffee", "Classic taste", "Quick to make"],
+      "Classic instant black coffee, strong and practical for starting the day.",
+    flavorNotes: ["Black coffee", "Classic taste", "25 cups"],
     preparation: [
-      "Add 1 sachet to 180ml hot water.",
-      "Stir for 10 seconds.",
-      "Enjoy black or with a hint of brown sugar."
+      "Add one serving to hot water.",
+      "Stir well.",
+      "Drink it black or with sugar to taste."
     ],
-    price: "$7.50"
+    price: "Consultar"
   },
   {
-    id: "cappuccino",
-    name: "Cappuccino",
-    image: "/products/caramel-cappuccino.jpg",
+    id: "colcafe-cappuccino-caramelo",
+    name: "Colcafé Caramel Cappuccino",
+    image: "/products/colcafe-cappuccino-caramelo.png",
     shortDescription:
-      "Creamy cappuccino for a sweet pause at any time of day.",
-    flavorNotes: ["Creamy", "Light sweetness", "Cozy foam"],
+      "Sweet caramel cappuccino for a simple, cozy snack break.",
+    flavorNotes: ["Caramel", "Creamy", "6 sticks"],
     preparation: [
-      "Mix 1 stick with 160ml hot water.",
-      "Whisk briefly for extra foam.",
-      "Serve warm in your favorite mug."
+      "Open one stick.",
+      "Add hot water.",
+      "Stir until creamy."
     ],
-    price: "$9.00"
+    price: "Consultar"
   },
   {
-    id: "caramel-cappuccino",
-    name: "Caramel Cappuccino",
-    image: "/products/cappuccino-caramel-box.jpg",
+    id: "colcafe-cappuccino-vainilla",
+    name: "Colcafé Vanilla Cappuccino",
+    image: "/products/colcafe-cappuccino-vainilla.png",
     shortDescription:
-      "A sweet caramel cappuccino that is easy to make and easy to share.",
-    flavorNotes: ["Caramel", "Creamy", "Snack-time coffee"],
+      "Vanilla cappuccino with soft foam for an easy, calm pause.",
+    flavorNotes: ["Vanilla", "Extra foam", "6 sticks"],
     preparation: [
-      "Pour 1 stick into a cup.",
-      "Add 170ml hot water and stir.",
-      "Top with cinnamon if desired."
+      "Place one stick in a cup.",
+      "Add hot water.",
+      "Stir until dissolved."
     ],
-    price: "$9.50"
+    price: "Consultar"
   },
   {
-    id: "vanilla-cappuccino",
-    name: "Vanilla Cappuccino",
-    image: "/products/vanilla-cappuccino.jpg",
+    id: "nescafe-cappuccino-vainilla",
+    name: "Nescafé Vanilla Cappuccino",
+    image: "/products/nescafe-cappuccino-vainilla.png",
     shortDescription:
-      "Smooth vanilla cappuccino for anyone who likes a gentle, sweet coffee.",
-    flavorNotes: ["Vanilla", "Smooth", "Easygoing comfort"],
+      "Creamy vanilla cappuccino that is quick to make at home or at work.",
+    flavorNotes: ["Vanilla", "Creamy", "6 cups"],
     preparation: [
-      "Add 1 stick to 170ml hot water.",
-      "Stir until dissolved.",
-      "Finish with a touch of nutmeg."
+      "Pour one serving into your cup.",
+      "Add hot water.",
+      "Stir and enjoy."
     ],
-    price: "$9.50"
+    price: "Consultar"
   }
 ];

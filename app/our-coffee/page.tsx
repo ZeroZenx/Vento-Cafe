@@ -23,13 +23,13 @@ export default function OurCoffeePage() {
             WhatsApp para confirmar disponibilidad y entrega.
           </p>
         </div>
-        <div className="relative h-[430px] overflow-hidden rounded-3xl border border-espresso/10 shadow-soft">
+        <div className="relative min-h-[500px] overflow-hidden rounded-3xl border border-espresso/10 bg-beige/30 shadow-soft">
           <Image
-            src="/products/cafe-negro.jpg"
+            src="/products/nescafe-clasico.png"
             alt="Vento Cafe product showcase"
             fill
             sizes="(max-width: 1024px) 100vw, 45vw"
-            className="object-cover"
+            className="object-contain"
           />
         </div>
       </section>

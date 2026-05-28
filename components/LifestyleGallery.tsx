@@ -36,9 +36,8 @@ export function LifestyleGallery() {
                 alt={image.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover transition duration-700 group-hover:scale-[1.04]"
+                className="object-contain transition duration-700 group-hover:scale-[1.02]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-matte/45 via-transparent to-transparent" />
             </motion.figure>
           );
         })}

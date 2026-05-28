@@ -7,12 +7,12 @@ import { useLanguage } from "@/lib/i18n";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const socialImages = [
-  "/products/cafe-negro-pack.jpg",
-  "/products/vanilla-cappuccino.jpg",
-  "/founders/founders-03.jpg",
-  "/founders/founders-08.jpg",
-  "/founders/founders-11.jpg",
-  "/products/cappuccino-caramel-box.jpg"
+  { src: "/products/nescafe-clasico.png", fit: "contain" },
+  { src: "/products/colcafe-cappuccino-caramelo.png", fit: "contain" },
+  { src: "/products/colcafe-cappuccino-vainilla.png", fit: "contain" },
+  { src: "/founders/founders-03.jpg", fit: "contain" },
+  { src: "/founders/founders-10.jpg", fit: "contain" },
+  { src: "/products/nescafe-cappuccino-vainilla.png", fit: "contain" }
 ];
 
 export function TrustBadges() {
@@ -147,17 +147,17 @@ export function SocialSection() {
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {socialImages.map((src, index) => (
+          {socialImages.map((image, index) => (
             <figure
-              key={`${src}-${index}`}
-              className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-espresso/10 bg-white/65 shadow-soft"
+              key={`${image.src}-${index}`}
+              className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-espresso/10 bg-beige/25 shadow-soft"
             >
               <Image
-                src={src}
+                src={image.src}
                 alt="Vento Cafe social preview"
                 fill
                 sizes="(max-width: 640px) 50vw, 25vw"
-                className="object-contain p-1"
+                className={image.fit === "contain" ? "object-contain" : "object-cover"}
               />
             </figure>
           ))}

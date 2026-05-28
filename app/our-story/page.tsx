@@ -22,13 +22,13 @@ export default function OurStoryPage() {
             rutina diaria y atender a cada cliente de forma cercana en Valencia, Venezuela.
           </p>
         </div>
-        <div className="relative h-[430px] overflow-hidden rounded-3xl border border-espresso/10 shadow-soft">
+        <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-espresso/10 bg-beige/35 shadow-soft">
           <Image
             src="/founders/founders-11.jpg"
             alt="Vento Cafe founders embracing outdoors"
             fill
             sizes="(max-width: 1024px) 100vw, 45vw"
-            className="object-cover"
+            className="object-contain"
           />
         </div>
       </section>
@@ -39,13 +39,13 @@ export default function OurStoryPage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {["/founders/founders-08.jpg", "/founders/founders-09.jpg", "/founders/founders-12.jpg"].map(
             (image) => (
-              <div key={image} className="relative h-72 overflow-hidden rounded-2xl border border-espresso/10 shadow-soft">
+              <div key={image} className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-espresso/10 bg-beige/35 shadow-soft">
                 <Image
                   src={image}
                   alt="Founders journey moment"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             )

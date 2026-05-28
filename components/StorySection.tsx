@@ -31,14 +31,14 @@ export function StorySection({ compact = false }: StorySectionProps) {
       <div className="mt-10 space-y-10">
         {items.map((milestone, index) => (
           <AnimatedInView key={milestone.title.en} delay={index * 0.08}>
-            <article className="grid gap-6 rounded-3xl border border-espresso/10 bg-white/65 p-4 shadow-soft sm:p-6 md:grid-cols-[210px_1fr]">
-              <div className="relative h-72 overflow-hidden rounded-2xl bg-beige/40 md:h-full">
+            <article className="grid gap-6 rounded-3xl border border-espresso/10 bg-white/65 p-4 shadow-soft sm:p-6 md:grid-cols-[220px_1fr]">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-beige/40">
                 <Image
                   src={milestone.image}
                   alt={milestone.title[language]}
                   fill
                   sizes="(max-width: 768px) 100vw, 210px"
-                  className="object-cover object-top"
+                  className="object-contain"
                 />
               </div>
               <div className="flex flex-col justify-center">

@@ -131,16 +131,16 @@ export const productsContent = {
   },
   items: [
     {
-      id: "cafe-negro",
-      name: { es: "Café Negro", en: "Black Coffee" },
-      image: "/products/cafe-negro-pack.jpg",
+      id: "nescafe-clasico",
+      name: { es: "Nescafé Clásico", en: "Nescafé Clásico" },
+      image: "/products/nescafe-clasico.png",
       shortDescription: {
-        es: "Café fuerte y suave para mañanas ocupadas o tardes de trabajo.",
-        en: "Strong smooth coffee for busy mornings or work afternoons."
+        es: "Café negro soluble, fuerte y práctico para empezar el día.",
+        en: "Classic instant black coffee, strong and practical for starting the day."
       },
       flavorNotes: {
-        es: ["Café intenso", "Sabor clásico", "Rápido de preparar"],
-        en: ["Strong coffee", "Classic taste", "Quick to make"]
+        es: ["Café negro", "Sabor clásico", "25 tazas"],
+        en: ["Black coffee", "Classic taste", "25 cups"]
       },
       preparation: {
         es: ["Agrega una porción a agua caliente.", "Mezcla bien.", "Tómalo negro o con azúcar al gusto."],
@@ -149,34 +149,16 @@ export const productsContent = {
       price: "Consultar"
     },
     {
-      id: "cappuccino",
-      name: { es: "Cappuccino", en: "Cappuccino" },
-      image: "/products/caramel-cappuccino.jpg",
+      id: "colcafe-cappuccino-caramelo",
+      name: { es: "Colcafé Cappuccino Caramelo", en: "Colcafé Caramel Cappuccino" },
+      image: "/products/colcafe-cappuccino-caramelo.png",
       shortDescription: {
-        es: "Cappuccino cremoso para una pausa dulce en cualquier momento del día.",
-        en: "Creamy cappuccino for a sweet pause at any time of day."
+        es: "Cappuccino dulce de caramelo para una merienda sencilla y rica.",
+        en: "Sweet caramel cappuccino for a simple, cozy snack break."
       },
       flavorNotes: {
-        es: ["Cremoso", "Dulce suave", "Espuma cómoda"],
-        en: ["Creamy", "Light sweetness", "Cozy foam"]
-      },
-      preparation: {
-        es: ["Vierte un sobre en tu taza.", "Agrega agua caliente.", "Mezcla y disfruta."],
-        en: ["Pour one stick into your cup.", "Add hot water.", "Stir and enjoy."]
-      },
-      price: "Consultar"
-    },
-    {
-      id: "caramel-cappuccino",
-      name: { es: "Cappuccino Caramelo", en: "Caramel Cappuccino" },
-      image: "/products/cappuccino-caramel-box.jpg",
-      shortDescription: {
-        es: "Un cappuccino dulce con sabor a caramelo, fácil de preparar y compartir.",
-        en: "A sweet caramel cappuccino that is easy to make and easy to share."
-      },
-      flavorNotes: {
-        es: ["Caramelo", "Cremoso", "Para meriendas"],
-        en: ["Caramel", "Creamy", "Snack-time coffee"]
+        es: ["Caramelo", "Cremoso", "6 sobres"],
+        en: ["Caramel", "Creamy", "6 sticks"]
       },
       preparation: {
         es: ["Abre un sobre.", "Agrega agua caliente.", "Revuelve hasta que quede cremoso."],
@@ -185,20 +167,38 @@ export const productsContent = {
       price: "Consultar"
     },
     {
-      id: "vanilla-cappuccino",
-      name: { es: "Cappuccino Vainilla", en: "Vanilla Cappuccino" },
-      image: "/products/vanilla-cappuccino.jpg",
+      id: "colcafe-cappuccino-vainilla",
+      name: { es: "Colcafé Cappuccino Vainilla", en: "Colcafé Vanilla Cappuccino" },
+      image: "/products/colcafe-cappuccino-vainilla.png",
       shortDescription: {
-        es: "Cappuccino de vainilla suave para quienes prefieren un café dulce y tranquilo.",
-        en: "Smooth vanilla cappuccino for anyone who likes a gentle, sweet coffee."
+        es: "Cappuccino de vainilla con espuma suave para una pausa tranquila.",
+        en: "Vanilla cappuccino with soft foam for an easy, calm pause."
       },
       flavorNotes: {
-        es: ["Vainilla", "Suave", "Para relajarte"],
-        en: ["Vanilla", "Smooth", "Easygoing comfort"]
+        es: ["Vainilla", "Extra espuma", "6 sobres"],
+        en: ["Vanilla", "Extra foam", "6 sticks"]
       },
       preparation: {
         es: ["Coloca un sobre en una taza.", "Agrega agua caliente.", "Mezcla hasta disolver."],
         en: ["Place one stick in a cup.", "Add hot water.", "Stir until dissolved."]
+      },
+      price: "Consultar"
+    },
+    {
+      id: "nescafe-cappuccino-vainilla",
+      name: { es: "Nescafé Cappuccino Vainilla", en: "Nescafé Vanilla Cappuccino" },
+      image: "/products/nescafe-cappuccino-vainilla.png",
+      shortDescription: {
+        es: "Cappuccino de vainilla cremoso para preparar rápido en casa o en la oficina.",
+        en: "Creamy vanilla cappuccino that is quick to make at home or at work."
+      },
+      flavorNotes: {
+        es: ["Vainilla", "Cremoso", "6 tazas"],
+        en: ["Vanilla", "Creamy", "6 cups"]
+      },
+      preparation: {
+        es: ["Vierte una porción en tu taza.", "Agrega agua caliente.", "Revuelve y disfruta."],
+        en: ["Pour one serving into your cup.", "Add hot water.", "Stir and enjoy."]
       },
       price: "Consultar"
     }
@@ -235,4 +235,3 @@ export const payContent = {
     en: "This screen is for quick roadside or event sales. It is not a full ecommerce checkout."
   }
 };
-

@@ -53,15 +53,14 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="relative h-[460px] overflow-hidden rounded-3xl border border-espresso/10 shadow-soft">
+        <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-espresso/10 bg-beige/35 shadow-soft">
           <Image
             src="/founders/founders-04.jpg"
             alt="Vento Cafe founders portrait"
             fill
             sizes="(max-width: 1024px) 100vw, 45vw"
-            className="object-cover"
+            className="object-contain"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-matte/45 via-transparent to-transparent" />
         </div>
       </div>
     </section>
