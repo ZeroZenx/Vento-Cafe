@@ -38,16 +38,10 @@ export default function OurStoryPage() {
       <section className="mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8 sm:pb-20">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            "/founders/founders-studio-hug.jpg",
+            "/founders/founders-extra-0906.jpg",
             "/founders/founders-studio-kiss.jpg",
             "/founders/founders-formal-black.jpg",
             "/founders/founders-los-guayos-sky.jpg",
-            "/founders/founders-beach-palm.jpg",
-            "/founders/founders-extra-0906.jpg",
-            "/founders/founders-extra-0216.jpg",
-            "/founders/founders-extra-0144.jpg",
-            "/founders/founders-extra-1523.jpg",
-            "/founders/founders-extra-0395.jpg",
             "/brand/vento-cup-counter.jpg",
             "/brand/vento-logo-counter.jpg"
           ].map(
