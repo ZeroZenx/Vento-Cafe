@@ -5,7 +5,7 @@ import { StorySection } from "@/components/StorySection";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Discover the founders behind Vento Cafe and the journey connecting Venezuelan warmth and Trinidadian lifestyle coffee moments."
+    "Discover Darren and Francis, the couple building Vento Café in Venezuela."
 };
 
 export default function OurStoryPage() {
@@ -13,14 +13,13 @@ export default function OurStoryPage() {
     <>
       <section className="mx-auto grid w-full max-w-7xl gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:py-18">
         <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-forest">Our Story</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-forest">Nuestra historia</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight text-espresso sm:text-5xl">
-            A Coffee Brand Rooted in Love, Family, and Everyday Calm
+            Una marca de café creada por Darren y Francis
           </h1>
           <p className="mt-5 text-base leading-relaxed text-matte/75">
-            Vento Cafe is built by a real couple living between Trinidad and Venezuela. What started
-            as a daily coffee ritual became a shared dream: creating a premium but accessible coffee
-            experience that feels like home.
+            Vento Café nació como un sueño compartido: trabajar con amor, vender café útil para la
+            rutina diaria y atender a cada cliente de forma cercana en Valencia, Venezuela.
           </p>
         </div>
         <div className="relative h-[430px] overflow-hidden rounded-3xl border border-espresso/10 shadow-soft">

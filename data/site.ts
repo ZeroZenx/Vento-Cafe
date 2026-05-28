@@ -1,11 +1,13 @@
 export const siteConfig = {
-  name: "Vento Cafe",
+  name: "Vento Café",
   description:
-    "A warm lifestyle coffee brand by a couple living between Trinidad and Venezuela.",
-  whatsappNumber: "+1868-000-0000",
-  whatsappMessage: "Hi Vento Cafe, I would love to order coffee.",
+    "Pide café instantáneo premium y mezclas de cappuccino en Valencia, Venezuela. Pedidos por WhatsApp, Pago Móvil y Binance.",
+  descriptionEn:
+    "Order premium instant coffee and cappuccino mixes in Valencia, Venezuela. WhatsApp ordering, Pago Móvil, and Binance accepted.",
+  whatsappNumber: "+58 424-9726415",
+  whatsappMessage: "Hola Vento Café, quiero hacer un pedido de café.",
   instagramUrl: "https://instagram.com/ventocafe",
-  location: "Port of Spain, Trinidad & Maracay, Venezuela"
+  location: "Valencia, Venezuela"
 };
 
 export const navLinks = [
