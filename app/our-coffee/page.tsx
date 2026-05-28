@@ -6,7 +6,7 @@ import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 export const metadata: Metadata = {
   title: "Our Coffee",
   description:
-    "Explore Vento Café instant coffee and cappuccino mixes for delivery in Valencia, Venezuela."
+    "Explore Vento Café instant coffee and cappuccino mixes for delivery in Los Guayos, Carabobo."
 };
 
 export default function OurCoffeePage() {
@@ -16,7 +16,7 @@ export default function OurCoffeePage() {
         <div>
           <p className="text-xs uppercase tracking-[0.28em] text-forest">Nuestros cafés</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight text-espresso sm:text-5xl">
-            Café instantáneo y cappuccino para pedir fácil en Valencia
+            Café instantáneo y cappuccino para pedir fácil en Los Guayos
           </h1>
           <p className="mt-5 text-base leading-relaxed text-matte/75">
             Tenemos café negro y mezclas de cappuccino para tu casa, oficina o evento. Escríbenos por

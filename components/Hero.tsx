@@ -59,7 +59,7 @@ export function Hero() {
         >
           <div className="relative aspect-[3/4] w-full">
             <Image
-              src="/founders/founders-03.jpg"
+              src="/founders/founders-studio-hug.jpg"
               alt="Darren and Francis, founders of Vento Cafe"
               fill
               priority

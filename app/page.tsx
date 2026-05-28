@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { ProductGrid } from "@/components/ProductGrid";
 import {
+  BrandProofSection,
   DeliverySection,
   FoundersPersonalitySection,
   HowToOrderSection,
@@ -16,6 +17,7 @@ export default function HomePage() {
       <ProductGrid compact />
       <HowToOrderSection />
       <DeliverySection />
+      <BrandProofSection />
       <FoundersPersonalitySection />
       <SocialSection />
     </>

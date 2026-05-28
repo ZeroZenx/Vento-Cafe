@@ -11,21 +11,21 @@ const websiteUrl = "https://vento-cafe.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(websiteUrl),
   title: {
-    default: "Vento Café | Coffee and Cappuccino in Valencia, Venezuela",
+    default: "Vento Café | Coffee and Cappuccino in Los Guayos, Carabobo",
     template: "%s | Vento Café"
   },
   description: siteConfig.descriptionEn,
   keywords: [
     "Vento Cafe",
     "Venezuelan coffee",
-    "Valencia Venezuela coffee",
+    "Los Guayos Carabobo coffee",
     "Pago Movil",
     "Binance",
     "cappuccino",
-    "coffee delivery Valencia"
+    "coffee delivery Los Guayos"
   ],
   openGraph: {
-    title: "Vento Café | Coffee and Cappuccino in Valencia, Venezuela",
+    title: "Vento Café | Coffee and Cappuccino in Los Guayos, Carabobo",
     description: siteConfig.descriptionEn,
     url: websiteUrl,
     siteName: "Vento Café",
@@ -34,18 +34,18 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/founders/founders-10.jpg",
+        url: "/brand/vento-cup-counter.jpg",
         width: 1200,
         height: 630,
-        alt: "Vento Cafe founders"
+        alt: "Vento Cafe branded cup"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vento Café | Coffee and Cappuccino in Valencia, Venezuela",
+    title: "Vento Café | Coffee and Cappuccino in Los Guayos, Carabobo",
     description: siteConfig.descriptionEn,
-    images: ["/founders/founders-10.jpg"]
+    images: ["/brand/vento-cup-counter.jpg"]
   },
   alternates: {
     languages: {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     }
   },
   other: {
-    "title:es": "Vento Café | Café y Cappuccino en Valencia, Venezuela",
+    "title:es": "Vento Café | Café y Cappuccino en Los Guayos, Carabobo",
     "description:es": siteConfig.description
   }
 };
@@ -65,7 +65,7 @@ const organizationSchema = {
   name: siteConfig.name,
   url: websiteUrl,
   description: siteConfig.description,
-  areaServed: ["Valencia, Venezuela"],
+  areaServed: ["Los Guayos, Carabobo"],
   paymentAccepted: ["Pago Móvil Venezuela", "Binance"],
   telephone: siteConfig.whatsappNumber,
   sameAs: [siteConfig.instagramUrl]

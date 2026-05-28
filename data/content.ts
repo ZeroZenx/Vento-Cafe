@@ -40,8 +40,8 @@ export const homeContent = {
     eyebrow: { es: "Vento Café", en: "Vento Café" },
     title: { es: "Café para tu rutina diaria.", en: "Coffee for your daily routine." },
     subtitle: {
-      es: "Vendemos café instantáneo premium y mezclas de cappuccino en Valencia, Venezuela.",
-      en: "We sell premium instant coffee and cappuccino mixes in Valencia, Venezuela."
+      es: "Vendemos café instantáneo premium y mezclas de cappuccino en Los Guayos, Carabobo.",
+      en: "We sell premium instant coffee and cappuccino mixes in Los Guayos, Carabobo."
     },
     support: {
       es: "Pedidos simples por WhatsApp, entrega local y pago con Pago Móvil o Binance.",
@@ -53,7 +53,7 @@ export const homeContent = {
   trustBadges: {
     es: [
       "Pedidos por WhatsApp",
-      "Delivery en Valencia",
+      "Delivery en Los Guayos",
       "Aceptamos Pago Móvil",
       "Aceptamos Binance",
       "Opciones de café frescas",
@@ -61,7 +61,7 @@ export const homeContent = {
     ],
     en: [
       "WhatsApp ordering",
-      "Delivery in Valencia",
+      "Delivery in Los Guayos",
       "Pago Móvil accepted",
       "Binance accepted",
       "Fresh coffee options",
@@ -78,14 +78,14 @@ export const homeContent = {
       es: [
         "Elige tu café",
         "Escríbenos por WhatsApp",
-        "Confirma la entrega en Valencia",
+        "Confirma la entrega en Los Guayos",
         "Paga con Pago Móvil o Binance",
         "Recibe tu café"
       ],
       en: [
         "Choose your coffee",
         "Message us on WhatsApp",
-        "Confirm delivery in Valencia",
+        "Confirm delivery in Los Guayos",
         "Pay with Pago Móvil or Binance",
         "Receive your coffee"
       ]
@@ -93,10 +93,17 @@ export const homeContent = {
     button: { es: "Pedir por WhatsApp", en: "Order on WhatsApp" }
   },
   delivery: {
-    heading: { es: "Delivery en Valencia", en: "Delivery in Valencia" },
+    heading: { es: "Delivery en Los Guayos", en: "Delivery in Los Guayos" },
     body: {
-      es: "Actualmente entregamos solo en Valencia, Venezuela. Escríbenos por WhatsApp para confirmar disponibilidad en tu zona.",
-      en: "We currently deliver only in Valencia, Venezuela. Message us on WhatsApp to confirm availability in your area."
+      es: "Actualmente entregamos en Los Guayos, Carabobo. Escríbenos por WhatsApp para confirmar disponibilidad en tu zona.",
+      en: "We currently deliver in Los Guayos, Carabobo. Message us on WhatsApp to confirm availability in your area."
+    }
+  },
+  brandProof: {
+    heading: { es: "Vento Café, listo para acompañarte", en: "Vento Café, ready for your day" },
+    body: {
+      es: "Estamos construyendo una marca cercana y práctica, con café fácil para casa, trabajo, eventos y ventas rápidas.",
+      en: "We are building a warm, practical brand with easy coffee for home, work, events, and quick sales."
     }
   },
   founders: {

@@ -5,7 +5,7 @@ import { StorySection } from "@/components/StorySection";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Discover Darren and Francis, the couple building Vento Café in Venezuela."
+    "Discover Darren and Francis, the couple building Vento Café in Los Guayos, Carabobo."
 };
 
 export default function OurStoryPage() {
@@ -19,12 +19,12 @@ export default function OurStoryPage() {
           </h1>
           <p className="mt-5 text-base leading-relaxed text-matte/75">
             Vento Café nació como un sueño compartido: trabajar con amor, vender café útil para la
-            rutina diaria y atender a cada cliente de forma cercana en Valencia, Venezuela.
+            rutina diaria y atender a cada cliente de forma cercana en Los Guayos, Carabobo.
           </p>
         </div>
         <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-espresso/10 bg-beige/35 shadow-soft">
           <Image
-            src="/founders/founders-11.jpg"
+            src="/founders/founders-formal-seated.jpg"
             alt="Vento Cafe founders embracing outdoors"
             fill
             sizes="(max-width: 1024px) 100vw, 45vw"
@@ -36,16 +36,34 @@ export default function OurStoryPage() {
       <StorySection />
 
       <section className="mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8 sm:pb-20">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {["/founders/founders-08.jpg", "/founders/founders-09.jpg", "/founders/founders-12.jpg"].map(
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            "/founders/founders-studio-hug.jpg",
+            "/founders/founders-studio-kiss.jpg",
+            "/founders/founders-formal-black.jpg",
+            "/founders/founders-los-guayos-sky.jpg",
+            "/founders/founders-beach-palm.jpg",
+            "/founders/founders-extra-0906.jpg",
+            "/founders/founders-extra-0216.jpg",
+            "/founders/founders-extra-0144.jpg",
+            "/founders/founders-extra-1523.jpg",
+            "/founders/founders-extra-0395.jpg",
+            "/brand/vento-cup-counter.jpg",
+            "/brand/vento-logo-counter.jpg"
+          ].map(
             (image) => (
-              <div key={image} className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-espresso/10 bg-beige/35 shadow-soft">
+              <div
+                key={image}
+                className={`relative overflow-hidden rounded-2xl border border-espresso/10 bg-beige/35 shadow-soft ${
+                  image.startsWith("/brand/") ? "aspect-[16/10] sm:col-span-2" : "aspect-[3/4]"
+                }`}
+              >
                 <Image
                   src={image}
                   alt="Founders journey moment"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-contain"
+                  className={image.startsWith("/brand/") ? "object-cover" : "object-contain"}
                 />
               </div>
             )

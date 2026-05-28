@@ -28,12 +28,12 @@ export const storyMilestones: StoryMilestone[] = [
   },
   {
     year: { es: "Hoy", en: "Today" },
-    title: { es: "Café para Valencia", en: "Coffee for Valencia" },
+    title: { es: "Café para Los Guayos", en: "Coffee for Los Guayos" },
     description: {
-      es: "Nuestra primera etapa es Valencia, Venezuela: pedidos por WhatsApp, entrega local y café para la rutina diaria.",
-      en: "Our first phase is Valencia, Venezuela: WhatsApp ordering, local delivery, and coffee for daily routines."
+      es: "Nuestra primera etapa es Los Guayos, Carabobo: pedidos por WhatsApp, entrega local y café para la rutina diaria.",
+      en: "Our first phase is Los Guayos, Carabobo: WhatsApp ordering, local delivery, and coffee for daily routines."
     },
-    image: "/founders/founders-10.jpg"
+    image: "/founders/founders-los-guayos-sky.jpg"
   }
 ];
 

@@ -7,12 +7,15 @@ import { useLanguage } from "@/lib/i18n";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const socialImages = [
+  { src: "/brand/vento-cup-counter.jpg", fit: "cover" },
+  { src: "/brand/vento-logo-counter.jpg", fit: "cover" },
   { src: "/products/nescafe-clasico.png", fit: "contain" },
   { src: "/products/colcafe-cappuccino-caramelo.png", fit: "contain" },
+  { src: "/founders/founders-beach-palm.jpg", fit: "cover" },
+  { src: "/founders/founders-extra-0144.jpg", fit: "cover" },
   { src: "/products/colcafe-cappuccino-vainilla.png", fit: "contain" },
-  { src: "/founders/founders-03.jpg", fit: "contain" },
-  { src: "/founders/founders-10.jpg", fit: "contain" },
-  { src: "/products/nescafe-cappuccino-vainilla.png", fit: "contain" }
+  { src: "/products/nescafe-cappuccino-vainilla.png", fit: "contain" },
+  { src: "/founders/founders-extra-0395.jpg", fit: "cover" }
 ];
 
 export function TrustBadges() {
@@ -77,12 +80,51 @@ export function DeliverySection() {
     <section className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-8">
       <div className="grid gap-6 rounded-3xl border border-espresso/10 bg-white/70 p-6 shadow-soft sm:p-10 lg:grid-cols-[0.75fr_1fr] lg:items-center">
         <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-forest">Valencia</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-forest">Los Guayos</p>
           <h2 className="mt-3 text-3xl font-semibold text-espresso sm:text-4xl">
             {homeContent.delivery.heading[language]}
           </h2>
         </div>
         <p className="text-base leading-relaxed text-matte/75">{homeContent.delivery.body[language]}</p>
+      </div>
+    </section>
+  );
+}
+
+export function BrandProofSection() {
+  const { language } = useLanguage();
+
+  return (
+    <section className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
+      <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p className="text-xs uppercase tracking-[0.28em] text-forest">
+            {language === "es" ? "Marca Vento" : "Vento Brand"}
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold text-espresso sm:text-4xl">
+            {homeContent.brandProof.heading[language]}
+          </h2>
+          <p className="mt-4 leading-relaxed text-matte/75">{homeContent.brandProof.body[language]}</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {[
+            { src: "/brand/vento-cup-counter.jpg", alt: "Vento Cafe branded cup on a counter" },
+            { src: "/brand/vento-logo-counter.jpg", alt: "Vento Cafe logo cards on a counter" }
+          ].map((image) => (
+            <figure
+              key={image.src}
+              className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-espresso/10 bg-beige/25 shadow-soft"
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 28vw"
+                className="object-cover"
+              />
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -96,7 +138,7 @@ export function FoundersPersonalitySection() {
       <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <div className="relative min-h-[560px] overflow-hidden rounded-3xl border border-espresso/10 bg-beige/40 shadow-soft">
           <Image
-            src="/founders/founders-03.jpg"
+            src="/founders/founders-formal-black.jpg"
             alt="Darren and Francis, founders of Vento Cafe"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -150,7 +192,9 @@ export function SocialSection() {
           {socialImages.map((image, index) => (
             <figure
               key={`${image.src}-${index}`}
-              className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-espresso/10 bg-beige/25 shadow-soft"
+              className={`relative overflow-hidden rounded-2xl border border-espresso/10 bg-beige/25 shadow-soft ${
+                image.src.startsWith("/brand/") ? "col-span-2 aspect-[16/10]" : "aspect-[3/4]"
+              }`}
             >
               <Image
                 src={image.src}
