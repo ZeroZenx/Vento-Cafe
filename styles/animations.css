@@ -1,0 +1,16 @@
+@keyframes pulseSoft {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+.loading-dot {
+  animation: pulseSoft 1.1s ease-in-out infinite;
+}

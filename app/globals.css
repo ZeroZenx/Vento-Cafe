@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "../styles/animations.css";
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Avenir Next", "Manrope", "Nunito Sans", "Segoe UI", sans-serif;
+}
+
+::selection {
+  background-color: #2f4b37;
+  color: #f8f1e4;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
