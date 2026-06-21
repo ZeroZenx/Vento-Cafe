@@ -1,19 +1,33 @@
+@import "../styles/animations.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "../styles/animations.css";
 
 :root {
   color-scheme: light;
 }
 
-html,
-body {
+html {
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Avenir Next", "Manrope", "Nunito Sans", "Segoe UI", sans-serif;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(47, 75, 55, 0.45);
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -23,4 +37,18 @@ body {
 
 .text-balance {
   text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

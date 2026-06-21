@@ -1,68 +1,74 @@
+import type { LocalizedText } from "@/data/translations";
+
 export type CoffeeProduct = {
   id: string;
-  name: string;
+  name: LocalizedText;
   image: string;
-  shortDescription: string;
-  flavorNotes: string[];
-  preparation: string[];
+  description: LocalizedText;
+  flavor: LocalizedText;
+  preparation: LocalizedText;
   price: string;
 };
 
 export const coffeeProducts: CoffeeProduct[] = [
   {
     id: "nescafe-clasico",
-    name: "Nescafé Clásico",
+    name: { es: "Nescafe Clasico", en: "Nescafe Classic" },
     image: "/products/nescafe-clasico.png",
-    shortDescription:
-      "Classic instant black coffee, strong and practical for starting the day.",
-    flavorNotes: ["Black coffee", "Classic taste", "25 cups"],
-    preparation: [
-      "Add one serving to hot water.",
-      "Stir well.",
-      "Drink it black or with sugar to taste."
-    ],
-    price: "Consultar"
+    description: {
+      es: "Cafe negro con sabor clasico para empezar la manana, listo en segundos.",
+      en: "Classic black coffee for starting the morning, ready in seconds."
+    },
+    flavor: { es: "Intenso, tostado y directo", en: "Bold, roasted and straightforward" },
+    preparation: {
+      es: "Agrega una porcion a una taza de agua caliente y mezcla.",
+      en: "Add one serving to a cup of hot water and stir."
+    },
+    price: "Precio por WhatsApp"
   },
   {
     id: "colcafe-cappuccino-caramelo",
-    name: "Colcafé Caramel Cappuccino",
+    name: { es: "Colcafe Cappuccino Caramelo", en: "Colcafe Caramel Cappuccino" },
     image: "/products/colcafe-cappuccino-caramelo.png",
-    shortDescription:
-      "Sweet caramel cappuccino for a simple, cozy snack break.",
-    flavorNotes: ["Caramel", "Creamy", "6 sticks"],
-    preparation: [
-      "Open one stick.",
-      "Add hot water.",
-      "Stir until creamy."
-    ],
-    price: "Consultar"
+    description: {
+      es: "Un cappuccino dulce y cremoso con ese toque de caramelo que provoca.",
+      en: "A sweet, creamy cappuccino with an easy caramel finish."
+    },
+    flavor: { es: "Caramelo suave y crema", en: "Soft caramel and cream" },
+    preparation: {
+      es: "Mezcla una porcion con agua caliente y bate un poco para mas espuma.",
+      en: "Mix one serving with hot water and whisk briefly for extra foam."
+    },
+    price: "Precio por WhatsApp"
   },
   {
     id: "colcafe-cappuccino-vainilla",
-    name: "Colcafé Vanilla Cappuccino",
+    name: { es: "Colcafe Cappuccino Vainilla", en: "Colcafe Vanilla Cappuccino" },
     image: "/products/colcafe-cappuccino-vainilla.png",
-    shortDescription:
-      "Vanilla cappuccino with soft foam for an easy, calm pause.",
-    flavorNotes: ["Vanilla", "Extra foam", "6 sticks"],
-    preparation: [
-      "Place one stick in a cup.",
-      "Add hot water.",
-      "Stir until dissolved."
-    ],
-    price: "Consultar"
+    description: {
+      es: "Cappuccino de vainilla con espuma extra para una pausa facil y calientica.",
+      en: "Vanilla cappuccino with extra foam for an easy, cozy break."
+    },
+    flavor: { es: "Vainilla suave y espuma cremosa", en: "Gentle vanilla and creamy foam" },
+    preparation: {
+      es: "Vierte una porcion, agrega agua caliente y mezcla bien.",
+      en: "Pour in one serving, add hot water and stir well."
+    },
+    price: "Precio por WhatsApp"
   },
   {
     id: "nescafe-cappuccino-vainilla",
-    name: "Nescafé Vanilla Cappuccino",
+    name: { es: "Nescafe Cappuccino Vainilla", en: "Nescafe Vanilla Cappuccino" },
     image: "/products/nescafe-cappuccino-vainilla.png",
-    shortDescription:
-      "Creamy vanilla cappuccino that is quick to make at home or at work.",
-    flavorNotes: ["Vanilla", "Creamy", "6 cups"],
-    preparation: [
-      "Pour one serving into your cup.",
-      "Add hot water.",
-      "Stir and enjoy."
-    ],
-    price: "Consultar"
+    description: {
+      es: "Ligero, aromatico y espumoso para una pausa tranquila durante el dia.",
+      en: "Light, fragrant and foamy for a calm break in your day."
+    },
+    flavor: { es: "Vainilla suave y crema", en: "Gentle vanilla and cream" },
+    preparation: {
+      es: "Agrega una porcion al agua caliente, mezcla y disfruta.",
+      en: "Add one serving to hot water, stir and enjoy."
+    },
+    price: "Precio por WhatsApp"
   }
 ];

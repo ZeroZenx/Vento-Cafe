@@ -1,46 +1,48 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageProvider";
+import { SafeImage } from "@/components/SafeImage";
 import { lifestyleImages } from "@/data/lifestyle";
 
+const aspectClasses = {
+  portrait: "aspect-[3/4]",
+  landscape: "aspect-[4/3]",
+  square: "aspect-square"
+};
+
 export function LifestyleGallery() {
+  const { language, t } = useLanguage();
+
   return (
-    <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20" id="lifestyle">
-      <div className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.28em] text-forest">Lifestyle</p>
-        <h2 className="mt-3 text-3xl font-semibold text-espresso sm:text-4xl">
-          Real Moments, Natural Warmth, Shared Coffee
-        </h2>
-        <p className="mt-4 text-matte/75">
-          Vento Cafe is a relationship-first brand. Travel, nature, and small coffee rituals shape
-          everything we create.
-        </p>
-      </div>
+    <section className="overflow-hidden bg-matte py-16 text-cream sm:py-24" id="lifestyle">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-8">
+        <div className="max-w-3xl">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-beige/70">{t.lifestyle.eyebrow}</p>
+          <h2 className="mt-4 font-serif text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">{t.lifestyle.title}</h2>
+          <p className="mt-4 max-w-2xl text-cream/65">{t.lifestyle.body}</p>
+        </div>
 
-      <div className="mt-10 grid auto-rows-[220px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {lifestyleImages.map((image, index) => {
-          const spanClass = image.span === "wide" ? "lg:col-span-2" : image.span === "tall" ? "sm:row-span-2" : "";
-
-          return (
+        <div className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3">
+          {lifestyleImages.map((image, index) => (
             <motion.figure
               key={image.src}
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              className={`group relative overflow-hidden rounded-2xl border border-espresso/10 shadow-soft ${spanClass}`}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.12 }}
+              transition={{ duration: 0.55, delay: (index % 3) * 0.06 }}
+              className={`relative mb-4 break-inside-avoid overflow-hidden rounded-[1.5rem] border border-cream/10 bg-[#27231f] ${aspectClasses[image.shape]}`}
             >
-              <Image
+              <SafeImage
                 src={image.src}
-                alt={image.alt}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-contain transition duration-700 group-hover:scale-[1.02]"
+                alt={language === "es" ? "Un momento de Darren y Francis, fundadores de Vento Cafe" : "A moment with Darren and Francis, founders of Vento Cafe"}
+                variant="portrait"
+                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
+                className="transition duration-700 hover:scale-[1.015]"
               />
             </motion.figure>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,68 +1,45 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { homeContent, productsContent, whatsapp } from "@/data/content";
+import { Check, MapPin } from "lucide-react";
+import { WhatsAppIcon } from "@/components/BrandIcons";
+import { useLanguage } from "@/components/LanguageProvider";
+import { siteConfig } from "@/data/site";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { useLanguage } from "@/lib/i18n";
 
 export function WhatsAppCTA() {
-  const { language } = useLanguage();
-  const [selectedProduct, setSelectedProduct] = useState(productsContent.items[0]?.name[language] ?? "Café Negro");
-
-  useEffect(() => {
-    setSelectedProduct(productsContent.items[0]?.name[language] ?? "Café Negro");
-  }, [language]);
-
-  const orderLink = useMemo(() => {
-    const message =
-      language === "es"
-        ? `Hola Vento Café, quiero hacer un pedido de ${selectedProduct}.`
-        : `Hi Vento Café, I would like to order ${selectedProduct}.`;
-    return buildWhatsAppUrl(whatsapp.phone, message);
-  }, [language, selectedProduct]);
+  const { t } = useLanguage();
+  const whatsappHref = buildWhatsAppUrl(siteConfig.whatsappNumber, t.whatsappOrder);
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20" id="order">
-      <div className="rounded-3xl border border-forest/20 bg-forest p-6 shadow-soft sm:p-10">
-        <p className="text-xs uppercase tracking-[0.28em] text-cream/80">WhatsApp</p>
-        <h2 className="mt-3 text-3xl font-semibold text-cream sm:text-4xl">
-          {homeContent.order.heading[language]}
-        </h2>
+    <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-24" id="order">
+      <div className="overflow-hidden rounded-[2rem] bg-forest text-cream shadow-soft sm:rounded-[2.75rem]">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="p-6 sm:p-10 lg:p-12">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-beige/75">{t.order.eyebrow}</p>
+            <h2 className="mt-4 font-serif text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">{t.order.title}</h2>
+            <ol className="mt-8 grid gap-3">
+              {t.order.steps.map((step, index) => (
+                <li key={step} className="flex min-h-14 items-center gap-4 rounded-2xl bg-cream/10 px-4 py-3">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-cream text-sm font-bold text-forest">{index + 1}</span>
+                  <span className="text-sm font-semibold text-cream/90 sm:text-base">{step}</span>
+                  <Check className="ml-auto h-4 w-4 text-beige/65" />
+                </li>
+              ))}
+            </ol>
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-bold text-forest transition hover:bg-beige sm:w-auto">
+              <WhatsAppIcon /> {t.order.cta}
+            </a>
+          </div>
 
-        <ol className="mt-8 grid gap-5 md:grid-cols-5">
-          {homeContent.order.steps[language].map((step, index) => (
-            <li key={step} className="rounded-2xl bg-cream/10 p-4 text-cream/90">
-              <p className="text-sm font-semibold">
-                {index + 1}. {step}
-              </p>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <label className="text-sm font-medium text-cream/90" htmlFor="coffee-select">
-            {language === "es" ? "Elige café" : "Choose Coffee"}
-          </label>
-          <select
-            id="coffee-select"
-            value={selectedProduct}
-            onChange={(event) => setSelectedProduct(event.target.value)}
-            className="w-full rounded-full border border-cream/30 bg-cream/95 px-5 py-3 text-sm text-espresso outline-none ring-offset-2 focus:ring-2 focus:ring-beige sm:max-w-xs"
-          >
-            {productsContent.items.map((product) => (
-              <option key={product.id} value={product.name[language]}>
-                {product.name[language]}
-              </option>
-            ))}
-          </select>
-          <a
-            href={orderLink}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-cream px-7 py-3 text-sm font-semibold text-forest transition hover:bg-beige"
-          >
-            {homeContent.order.button[language]}
-          </a>
+          <div className="flex flex-col justify-center bg-[#243c2c] p-6 sm:p-10 lg:p-12">
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-clay text-cream"><MapPin className="h-5 w-5" /></span>
+            <p className="mt-6 text-xs font-bold uppercase tracking-[0.24em] text-beige/70">{t.delivery.eyebrow}</p>
+            <h3 className="mt-3 font-serif text-3xl font-semibold sm:text-4xl">{t.delivery.title}</h3>
+            <p className="mt-4 max-w-md text-sm leading-7 text-cream/70 sm:text-base">{t.delivery.body}</p>
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-beige hover:text-cream">
+              {t.delivery.cta} <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>

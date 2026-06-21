@@ -1,9 +1,13 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { homeContent, productsContent, whatsapp } from "@/data/content";
-import { useLanguage } from "@/lib/i18n";
+import { ArrowRight } from "lucide-react";
+import { SafeImage } from "@/components/SafeImage";
+import { WhatsAppIcon } from "@/components/BrandIcons";
+import { useLanguage } from "@/components/LanguageProvider";
+import { coffeeProducts } from "@/data/products";
+import { siteConfig } from "@/data/site";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 type ProductGridProps = {
@@ -11,82 +15,64 @@ type ProductGridProps = {
 };
 
 export function ProductGrid({ compact = false }: ProductGridProps) {
-  const { language } = useLanguage();
-  const products = compact ? productsContent.items.slice(0, 2) : productsContent.items;
-  const orderHref = buildWhatsAppUrl(whatsapp.phone, whatsapp.orderMessage[language]);
+  const { language, t } = useLanguage();
+  const products = compact ? coffeeProducts.slice(0, 4) : coffeeProducts;
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20" id="coffee">
-      <div className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.28em] text-forest">{productsContent.section.eyebrow[language]}</p>
-        <h2 className="mt-3 text-3xl font-semibold text-espresso sm:text-4xl">
-          {productsContent.section.heading[language]}
-        </h2>
-        <p className="mt-4 text-matte/75">{productsContent.section.description[language]}</p>
+    <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-24" id="coffee">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-3xl">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-forest">{t.coffee.eyebrow}</p>
+          <h2 className="mt-4 font-serif text-4xl font-semibold tracking-[-0.035em] text-espresso sm:text-5xl">{t.coffee.title}</h2>
+          <p className="mt-4 max-w-2xl text-matte/70">{t.coffee.body}</p>
+        </div>
+        {compact && (
+          <Link href="/our-coffee" className="inline-flex items-center gap-2 text-sm font-bold text-forest">
+            {t.coffee.all} <ArrowRight className="h-4 w-4" />
+          </Link>
+        )}
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {products.map((product, index) => (
-          <motion.article
-            key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.65, delay: index * 0.07 }}
-            whileHover={{ y: -6 }}
-            className="group overflow-hidden rounded-3xl border border-espresso/10 bg-white/75 shadow-soft"
-          >
-            <div className="bg-beige/25 px-5 py-5 sm:px-8">
-              <div className="relative mx-auto aspect-[3/4] w-full max-w-[300px] overflow-hidden rounded-2xl bg-white shadow-soft sm:max-w-[340px]">
-                <Image
-                  src={product.image}
-                  alt={product.name[language]}
-                  fill
-                  sizes="(max-width: 768px) 82vw, 340px"
-                  className="object-contain transition duration-700 group-hover:scale-[1.02]"
-                />
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {products.map((product, index) => {
+          const productName = product.name[language];
+          const orderMessage = language === "es"
+            ? `Hola Vento Cafe, quiero pedir ${productName}. Me pueden confirmar precio y disponibilidad?`
+            : `Hi Vento Cafe, I would like to order ${productName}. Can you confirm the price and availability?`;
+
+          return (
+            <motion.article
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.18 }}
+              transition={{ duration: 0.55, delay: index * 0.05 }}
+              whileHover={{ y: -5 }}
+              className="flex flex-col overflow-hidden rounded-[1.75rem] border border-espresso/10 bg-white/65 shadow-[0_24px_65px_-42px_rgba(59,38,23,0.7)]"
+            >
+              <div className="relative aspect-[4/5] w-full bg-[#f3eadc]">
+                <SafeImage src={product.image} alt={productName} variant="product" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 24vw" />
               </div>
-            </div>
-
-            <div className="space-y-4 p-6">
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="text-2xl font-semibold text-espresso">{product.name[language]}</h3>
-                <span className="rounded-full bg-beige px-4 py-1 text-sm font-semibold text-espresso">
-                  {product.price}
-                </span>
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+                <h3 className="font-serif text-2xl font-semibold leading-tight text-espresso">{productName}</h3>
+                <p className="mt-3 text-sm leading-6 text-matte/70">{product.description[language]}</p>
+                <dl className="mt-5 space-y-4 border-t border-espresso/10 pt-5 text-sm">
+                  <div>
+                    <dt className="text-[10px] font-bold uppercase tracking-[0.18em] text-forest">{t.coffee.flavor}</dt>
+                    <dd className="mt-1 text-matte/70">{product.flavor[language]}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[10px] font-bold uppercase tracking-[0.18em] text-forest">{t.coffee.prepare}</dt>
+                    <dd className="mt-1 text-matte/70">{product.preparation[language]}</dd>
+                  </div>
+                </dl>
+                <a href={buildWhatsAppUrl(siteConfig.whatsappNumber, orderMessage)} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-forest px-4 py-2.5 text-sm font-bold text-cream transition hover:bg-espresso">
+                  <WhatsAppIcon className="h-4 w-4" /> {t.coffee.order}
+                </a>
               </div>
-
-              <p className="text-sm leading-relaxed text-matte/75">{product.shortDescription[language]}</p>
-
-              <div>
-                <h4 className="text-xs font-semibold uppercase tracking-[0.22em] text-forest">
-                  {productsContent.section.notesLabel[language]}
-                </h4>
-                <p className="mt-2 text-sm text-matte/80">{product.flavorNotes[language].join(" | ")}</p>
-              </div>
-
-              <div>
-                <h4 className="text-xs font-semibold uppercase tracking-[0.22em] text-forest">
-                  {productsContent.section.prepLabel[language]}
-                </h4>
-                <ol className="mt-2 space-y-1 text-sm text-matte/80">
-                  {product.preparation[language].map((step) => (
-                    <li key={step}>{step}</li>
-                  ))}
-                </ol>
-              </div>
-
-              <a
-                href={orderHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-forest px-5 text-sm font-semibold text-cream transition hover:bg-espresso"
-              >
-                {homeContent.hero.primaryCta[language]}
-              </a>
-            </div>
-          </motion.article>
-        ))}
+            </motion.article>
+          );
+        })}
       </div>
     </section>
   );

@@ -1,111 +1,79 @@
-# Vento Cafe Website
+# Vento Cafe
 
-Premium modern coffee lifestyle website for **Vento Cafe**.
-Built with a storytelling-first approach around the real founders and authentic photography.
+A bilingual, mobile-first coffee lifestyle site for a couple-built business serving Valencia and Los Guayos, Carabobo.
 
-## Tech Stack
+## Phase 1 Features
 
-- Next.js 15 (App Router)
+- Spanish-first experience with a persistent EN/ES language toggle
+- WhatsApp ordering at `+58 424-9726415`
+- Valencia and Los Guayos delivery messaging and trust signals
+- Responsive product catalogue with safe, uncropped packaging presentation
+- Founder-led storytelling and lifestyle gallery using all founder photos
+- Floating desktop WhatsApp action and sticky mobile order bar
+- Pago Movil and Binance payment information
+- Mobile quick-payment terminal at `/pay`
+- SEO metadata, Open Graph data, local-business schema, sitemap, and robots
+
+## Stack
+
+- Next.js 16 App Router
+- React 19
 - TypeScript
 - Tailwind CSS
 - Framer Motion
-- Fully responsive layout
-- SEO-ready metadata + sitemap + robots
+- Lucide React
 
 ## Project Structure
 
 ```text
-app/
-  contact/
-  our-coffee/
-  our-story/
-  globals.css
-  layout.tsx
-  loading.tsx
-  page.tsx
-  robots.ts
-  sitemap.ts
-components/
-  AnimatedInView.tsx
-  Footer.tsx
-  Hero.tsx
-  LifestyleGallery.tsx
-  Navbar.tsx
-  ProductGrid.tsx
-  StorySection.tsx
-  WhatsAppCTA.tsx
-data/
-  lifestyle.ts
-  products.ts
-  site.ts
-  story.ts
-lib/
-  whatsapp.ts
-public/
-  founders/
-  products/
-styles/
-  animations.css
+app/                 Routes, metadata, sitemap, and global styles
+components/          Reusable UI, language state, safe images, and payment UI
+data/                Bilingual copy, products, lifestyle images, and site settings
+lib/                 WhatsApp URL helper
+public/founders/     Founder photography
+public/products/     Product photography
+styles/              Shared animation styles
 ```
 
 ## Local Development
 
-1. Install dependencies:
-
 ```bash
 pnpm install
-```
-
-2. Start dev server:
-
-```bash
 pnpm dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000).
 
-## Environment & Brand Edits
-
-Update these values in `data/site.ts`:
-
-- `whatsappNumber`
-- `instagramUrl`
-- `location`
-
-Update SEO base URL in:
-
-- `app/layout.tsx` (`websiteUrl`)
-- `app/sitemap.ts`
-- `app/robots.ts`
-
-## Deploy to Vercel
-
-1. Push project to GitHub.
-2. Log into [Vercel](https://vercel.com/).
-3. Click **Add New Project**.
-4. Import the GitHub repository.
-5. Keep default build settings (Next.js auto-detected).
-6. Click **Deploy**.
-
-Vercel build command and output are automatically handled for Next.js 15.
-
-## GitHub Setup Instructions
-
-1. Create a new repository on GitHub.
-2. In this project directory, run:
+## Quality Checks
 
 ```bash
-git init
-git add .
-git commit -m "feat: launch Vento Cafe brand website"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
+npm run typecheck
+npm run lint
+npm run build
 ```
 
-3. Connect that repository in Vercel for continuous deployment.
+## Business Settings
 
-## Notes
+Update `data/site.ts` to change:
 
-- No ecommerce, database, login, or payment gateway included yet.
-- The current experience is focused entirely on branding, storytelling, and emotional visual identity.
+- WhatsApp number
+- Instagram handle and URL
+- Delivery location
+- Production website URL
+
+Edit `data/translations.ts` for bilingual content and `data/products.ts` for catalogue details.
+
+The QR blocks in `/pay` are clearly marked placeholders. Replace `QrPlaceholder` in `components/QuickPay.tsx` with the final Pago Movil and Binance QR images before accepting live payments.
+
+## Vercel Deployment
+
+1. Push changes to `main` in `ZeroZenx/Vento-Cafe`.
+2. Import or reconnect the repository in Vercel.
+3. Keep the framework preset as Next.js and use the default build command.
+4. Confirm the production domain, then update `websiteUrl` in `data/site.ts`, `app/robots.ts`, and `app/sitemap.ts` if the domain differs.
+
+Vercel automatically rebuilds the production site after each push to `main` when Git integration is enabled.
+
+## Scope
+
+Phase 1 intentionally uses WhatsApp ordering and simple scan-to-pay guidance. It does not include a database, login, cart, payment gateway, or automated checkout.

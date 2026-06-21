@@ -1,89 +1,81 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
+import { FloatingActions } from "@/components/FloatingActions";
 import { Footer } from "@/components/Footer";
-import { GlobalWhatsAppActions } from "@/components/GlobalWhatsAppActions";
+import { LanguageProvider } from "@/components/LanguageProvider";
+import { Navbar } from "@/components/Navbar";
 import { siteConfig } from "@/data/site";
-import { LanguageProvider } from "@/lib/i18n";
 
-const websiteUrl = "https://vento-cafe.vercel.app";
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  display: "swap",
+  weight: ["500", "600", "700"]
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(websiteUrl),
+  metadataBase: new URL(siteConfig.websiteUrl),
   title: {
-    default: "Vento Café | Coffee and Cappuccino in Los Guayos, Carabobo",
-    template: "%s | Vento Café"
+    default: "Vento Cafe | Cafe y Cappuccino en Valencia y Los Guayos",
+    template: "%s | Vento Cafe"
   },
-  description: siteConfig.descriptionEn,
+  description:
+    "Pide cafe instantaneo premium y mezclas de cappuccino en Valencia y Los Guayos, Carabobo. Pedidos por WhatsApp, Pago Movil y Binance.",
   keywords: [
-    "Vento Cafe",
-    "Venezuelan coffee",
-    "Los Guayos Carabobo coffee",
+    "cafe Valencia Venezuela",
+    "cappuccino Valencia",
+    "cafe Los Guayos",
+    "cafe instantaneo",
     "Pago Movil",
     "Binance",
-    "cappuccino",
-    "coffee delivery Los Guayos"
+    "Vento Cafe"
   ],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Vento Café | Coffee and Cappuccino in Los Guayos, Carabobo",
-    description: siteConfig.descriptionEn,
-    url: websiteUrl,
-    siteName: "Vento Café",
+    title: "Vento Cafe | Cafe y Cappuccino en Valencia y Los Guayos",
+    description:
+      "Pide cafe instantaneo premium y mezclas de cappuccino en Valencia y Los Guayos. Pedidos por WhatsApp, Pago Movil y Binance.",
+    url: siteConfig.websiteUrl,
+    siteName: "Vento Cafe",
     locale: "es_VE",
     alternateLocale: ["en_US"],
     type: "website",
-    images: [
-      {
-        url: "/brand/vento-cup-counter.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Vento Cafe branded cup"
-      }
-    ]
+    images: [{ url: "/founders/founders-11.jpg", width: 959, height: 1280, alt: "Darren y Francis, fundadores de Vento Cafe" }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vento Café | Coffee and Cappuccino in Los Guayos, Carabobo",
-    description: siteConfig.descriptionEn,
-    images: ["/brand/vento-cup-counter.jpg"]
-  },
-  alternates: {
-    languages: {
-      es: websiteUrl,
-      en: websiteUrl
-    }
-  },
-  other: {
-    "title:es": "Vento Café | Café y Cappuccino en Los Guayos, Carabobo",
-    "description:es": siteConfig.description
+    title: "Vento Cafe | Cafe y Cappuccino en Valencia y Los Guayos",
+    description: "Cafe, conexion y cultura. Delivery en Valencia y Los Guayos, Carabobo.",
+    images: ["/founders/founders-11.jpg"]
   }
 };
 
-const organizationSchema = {
+const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: siteConfig.name,
-  url: websiteUrl,
-  description: siteConfig.description,
-  areaServed: ["Los Guayos, Carabobo"],
-  paymentAccepted: ["Pago Móvil Venezuela", "Binance"],
+  "@type": "LocalBusiness",
+  name: "Vento Cafe",
+  url: siteConfig.websiteUrl,
   telephone: siteConfig.whatsappNumber,
+  description: "Cafe instantaneo premium y mezclas de cappuccino con delivery en Valencia y Los Guayos, Carabobo.",
+  areaServed: [
+    { "@type": "City", name: "Valencia, Carabobo, Venezuela" },
+    { "@type": "City", name: "Los Guayos, Carabobo, Venezuela" }
+  ],
   sameAs: [siteConfig.instagramUrl]
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es">
-      <body className="bg-warm-gradient pb-24 font-sans text-matte antialiased md:pb-0">
+    <html lang="es" className={`${manrope.variable} ${cormorant.variable}`} suppressHydrationWarning>
+      <body className="bg-warm-gradient font-sans text-matte antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         <LanguageProvider>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-          />
           <Navbar />
           <main>{children}</main>
           <Footer />
-          <GlobalWhatsAppActions />
+          <FloatingActions />
         </LanguageProvider>
       </body>
     </html>
