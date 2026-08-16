@@ -4,8 +4,8 @@ import { StorySection } from "@/components/StorySection";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 
 export const metadata: Metadata = {
-  title: "Nuestra Historia",
-  description: "Conoce a Darren y Francis, la pareja detras de Vento Cafe en Valencia y Los Guayos, Carabobo."
+  title: "Our Story",
+  description: "Meet Darren and Francis, the couple building Vento Café & Market in Los Guayos, Carabobo."
 };
 
 export default function OurStoryPage() {

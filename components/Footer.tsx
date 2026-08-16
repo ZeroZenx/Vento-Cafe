@@ -17,7 +17,7 @@ export function Footer() {
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <div className="inline-flex items-center gap-2 text-xl font-semibold text-espresso">
-            <Coffee className="h-5 w-5" /> Vento Cafe
+            <Coffee className="h-5 w-5" /> Vento Café & Market
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-matte/70">{t.footer.line}</p>
         </div>

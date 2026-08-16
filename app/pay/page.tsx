@@ -3,7 +3,7 @@ import { QuickPay } from "@/components/QuickPay";
 
 export const metadata: Metadata = {
   title: "Quick Pay",
-  description: "Pago rapido para Vento Cafe con Pago Movil Venezuela o Binance."
+  description: "Quick mobile payment screen for Vento Café & Market sales with Pago Móvil Venezuela and Binance."
 };
 
 export default function PayPage() {

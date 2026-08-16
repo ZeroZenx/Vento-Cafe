@@ -5,13 +5,17 @@ import { SafeImage } from "@/components/SafeImage";
 import { useLanguage } from "@/components/LanguageProvider";
 import { siteConfig } from "@/data/site";
 
+const images = [
+  { src: "/brand/vento-cup-counter.jpg", variant: "landscape" as const },
+  { src: "/brand/vento-logo-counter.jpg", variant: "landscape" as const },
+  { src: "/products/market/jergens-small-lotions.jpg", variant: "landscape" as const },
+  { src: "/products/market/white-rain-body-wash-colors.jpg", variant: "landscape" as const },
+  { src: "/products/market/soft-silky-mango-offer.jpg", variant: "landscape" as const },
+  { src: "/products/nescafe-clasico.png", variant: "product" as const }
+];
+
 export function SocialSection() {
   const { t } = useLanguage();
-  const images = [
-    "/founders/founders-beach-palm.jpg",
-    "/founders/founders-studio-hug.jpg",
-    "/founders/founders-los-guayos-sky.jpg"
-  ];
 
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-24">
@@ -23,11 +27,12 @@ export function SocialSection() {
           <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-full border border-espresso/20 px-5 py-3 text-sm font-bold text-espresso transition hover:bg-beige">
             <Instagram className="h-5 w-5" /> {t.social.cta}
           </a>
+          <p className="mt-4 text-sm font-semibold text-forest">{t.social.placeholder}</p>
         </div>
-        <div className="grid grid-cols-3 gap-2 sm:gap-4">
-          {images.map((src) => (
-            <div key={src} className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-beige/50">
-              <SafeImage src={src} alt="Vento Cafe social story" variant="portrait" sizes="(max-width: 1024px) 30vw, 20vw" />
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          {images.map((image) => (
+            <div key={image.src} className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-beige/50">
+              <SafeImage src={image.src} alt="Vento Café & Market social preview" variant={image.variant} sizes="(max-width: 1024px) 46vw, 20vw" />
             </div>
           ))}
         </div>

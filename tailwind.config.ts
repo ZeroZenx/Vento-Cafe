@@ -17,8 +17,8 @@ const config: Config = {
         clay: "#a46a56"
       },
       fontFamily: {
-        sans: ["var(--font-manrope)", "sans-serif"],
-        serif: ["var(--font-cormorant)", "serif"]
+        sans: ["Avenir Next", "Inter", "Segoe UI", "Arial", "sans-serif"],
+        serif: ["Georgia", "Times New Roman", "serif"]
       },
       boxShadow: {
         soft: "0 20px 45px -26px rgba(25, 23, 21, 0.45)"

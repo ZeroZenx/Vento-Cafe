@@ -12,7 +12,7 @@ const aspectClasses = {
 };
 
 export function LifestyleGallery() {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section className="overflow-hidden bg-matte py-16 text-cream sm:py-24" id="lifestyle">
@@ -35,8 +35,8 @@ export function LifestyleGallery() {
             >
               <SafeImage
                 src={image.src}
-                alt={language === "es" ? "Un momento de Darren y Francis, fundadores de Vento Cafe" : "A moment with Darren and Francis, founders of Vento Cafe"}
-                variant="portrait"
+                alt="Vento Café & Market lifestyle preview"
+                variant={image.variant}
                 sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
                 className="transition duration-700 hover:scale-[1.015]"
               />

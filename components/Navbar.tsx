@@ -14,7 +14,7 @@ export function Navbar() {
   const navLinks = [
     { label: t.nav.home, href: "/" },
     { label: t.nav.story, href: "/our-story" },
-    { label: t.nav.coffee, href: "/our-coffee" },
+    { label: t.nav.coffee, href: "/products" },
     { label: t.nav.pay, href: "/pay" },
     { label: t.nav.contact, href: "/contact" }
   ];
@@ -27,7 +27,7 @@ export function Navbar() {
           <span className="grid h-9 w-9 place-items-center rounded-full bg-espresso text-cream transition-transform group-hover:-rotate-6">
             <Coffee className="h-4 w-4" strokeWidth={1.8} />
           </span>
-          <span className="text-lg font-semibold tracking-[-0.02em] text-espresso">Vento Cafe</span>
+          <span className="text-lg font-semibold tracking-[-0.02em] text-espresso">Vento Café & Market</span>
         </Link>
 
         <ul className={`${isPayPage ? "hidden" : "hidden lg:flex"} items-center gap-6`}>
@@ -57,15 +57,17 @@ export function Navbar() {
               </button>
             ))}
           </div>
-          {!isPayPage && <button
-            type="button"
-            aria-label={open ? t.nav.close : t.nav.menu}
-            aria-expanded={open}
-            className="grid h-11 w-11 place-items-center rounded-full border border-espresso/15 text-espresso lg:hidden"
-            onClick={() => setOpen((current) => !current)}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>}
+          {!isPayPage && (
+            <button
+              type="button"
+              aria-label={open ? t.nav.close : t.nav.menu}
+              aria-expanded={open}
+              className="grid h-11 w-11 place-items-center rounded-full border border-espresso/15 text-espresso lg:hidden"
+              onClick={() => setOpen((current) => !current)}
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          )}
         </div>
       </nav>
 

@@ -35,7 +35,7 @@ export function Hero() {
             {t.hero.business}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/our-coffee" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-espresso px-6 py-3 text-sm font-bold text-cream transition hover:-translate-y-0.5 hover:bg-forest">
+            <Link href="/products" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-espresso px-6 py-3 text-sm font-bold text-cream transition hover:-translate-y-0.5 hover:bg-forest">
               {t.hero.coffeeCta} <ArrowRight className="h-4 w-4" />
             </Link>
             <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-espresso/20 bg-white/60 px-6 py-3 text-sm font-bold text-espresso transition hover:-translate-y-0.5 hover:bg-white">
@@ -46,11 +46,11 @@ export function Hero() {
 
         <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.12 }} className="relative mx-auto w-full max-w-[620px]">
           <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-espresso/10 bg-[#9b4f40] shadow-[0_35px_90px_-42px_rgba(59,38,23,0.65)] sm:rounded-[2.75rem]">
-            <SafeImage src="/founders/founders-11.jpg" alt="Darren and Francis, the founders of Vento Cafe" variant="hero" priority sizes="(max-width: 1024px) 92vw, 48vw" />
+            <SafeImage src="/founders/founders-11.jpg" alt="Darren and Francis, founders of Vento Café & Market" variant="hero" priority sizes="(max-width: 1024px) 92vw, 48vw" />
           </div>
           <div className="absolute -bottom-5 left-4 rounded-2xl border border-white/40 bg-cream/95 px-5 py-4 shadow-soft backdrop-blur sm:left-8">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-forest">Darren + Francis</p>
-            <p className="mt-1 text-sm text-matte/70">Venezuela × Trinidad</p>
+            <p className="mt-1 text-sm text-matte/70">Los Guayos, Carabobo</p>
           </div>
         </motion.div>
       </div>

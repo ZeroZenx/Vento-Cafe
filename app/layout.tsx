@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { FloatingActions } from "@/components/FloatingActions";
 import { Footer } from "@/components/Footer";
@@ -7,68 +6,66 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import { Navbar } from "@/components/Navbar";
 import { siteConfig } from "@/data/site";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-cormorant",
-  display: "swap",
-  weight: ["500", "600", "700"]
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.websiteUrl),
   title: {
-    default: "Vento Cafe | Cafe y Cappuccino en Valencia y Los Guayos",
-    template: "%s | Vento Cafe"
+    default: "Vento Café & Market | Coffee and Essentials in Los Guayos, Carabobo",
+    template: "%s | Vento Café & Market"
   },
-  description:
-    "Pide cafe instantaneo premium y mezclas de cappuccino en Valencia y Los Guayos, Carabobo. Pedidos por WhatsApp, Pago Movil y Binance.",
+  description: siteConfig.descriptionEn,
   keywords: [
-    "cafe Valencia Venezuela",
-    "cappuccino Valencia",
-    "cafe Los Guayos",
-    "cafe instantaneo",
+    "Vento Cafe",
+    "Vento Market",
+    "Los Guayos Carabobo products",
+    "coffee Los Guayos",
+    "personal care Los Guayos",
+    "household essentials Los Guayos",
     "Pago Movil",
-    "Binance",
-    "Vento Cafe"
+    "Binance"
   ],
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: {
+      es: siteConfig.websiteUrl,
+      en: siteConfig.websiteUrl
+    }
+  },
   openGraph: {
-    title: "Vento Cafe | Cafe y Cappuccino en Valencia y Los Guayos",
-    description:
-      "Pide cafe instantaneo premium y mezclas de cappuccino en Valencia y Los Guayos. Pedidos por WhatsApp, Pago Movil y Binance.",
+    title: "Vento Café & Market | Coffee and Essentials in Los Guayos, Carabobo",
+    description: siteConfig.descriptionEn,
     url: siteConfig.websiteUrl,
-    siteName: "Vento Cafe",
+    siteName: siteConfig.name,
     locale: "es_VE",
     alternateLocale: ["en_US"],
     type: "website",
-    images: [{ url: "/founders/founders-11.jpg", width: 959, height: 1280, alt: "Darren y Francis, fundadores de Vento Cafe" }]
+    images: [{ url: "/brand/vento-cup-counter.jpg", width: 1600, height: 900, alt: "Vento Café branded cup on a counter" }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vento Cafe | Cafe y Cappuccino en Valencia y Los Guayos",
-    description: "Cafe, conexion y cultura. Delivery en Valencia y Los Guayos, Carabobo.",
-    images: ["/founders/founders-11.jpg"]
+    title: "Vento Café & Market | Coffee and Essentials in Los Guayos, Carabobo",
+    description: siteConfig.descriptionEn,
+    images: ["/brand/vento-cup-counter.jpg"]
+  },
+  other: {
+    "title:es": "Vento Café & Market | Café y productos en Los Guayos, Carabobo",
+    "description:es": siteConfig.description
   }
 };
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "Vento Cafe",
+  name: siteConfig.name,
   url: siteConfig.websiteUrl,
   telephone: siteConfig.whatsappNumber,
-  description: "Cafe instantaneo premium y mezclas de cappuccino con delivery en Valencia y Los Guayos, Carabobo.",
-  areaServed: [
-    { "@type": "City", name: "Valencia, Carabobo, Venezuela" },
-    { "@type": "City", name: "Los Guayos, Carabobo, Venezuela" }
-  ],
+  description: siteConfig.description,
+  areaServed: [{ "@type": "City", name: "Los Guayos, Carabobo, Venezuela" }],
   sameAs: [siteConfig.instagramUrl]
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${manrope.variable} ${cormorant.variable}`} suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body className="bg-warm-gradient font-sans text-matte antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         <LanguageProvider>

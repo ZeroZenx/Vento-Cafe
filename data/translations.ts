@@ -6,214 +6,230 @@ export const translations = {
     nav: {
       home: "Inicio",
       story: "Nuestra historia",
-      coffee: "Nuestro cafe",
+      coffee: "Productos",
       pay: "Pagar",
       contact: "Contacto",
       menu: "Menu",
       close: "Cerrar"
     },
     hero: {
-      eyebrow: "Cafe hecho con carino en Carabobo",
-      title: "Cafe. Conexion. Cultura.",
-      subtitle: "Creado con la calidez de Venezuela y Trinidad.",
-      business: "Vendemos cafe instantaneo premium y mezclas de cappuccino en Valencia y Los Guayos, Carabobo.",
-      coffeeCta: "Explora nuestros cafes",
+      eyebrow: "Vento Café & Market en Carabobo",
+      title: "Café. Cuidado. Hogar.",
+      subtitle: "Productos útiles para tu rutina diaria.",
+      business: "Vendemos café, cuidado personal y productos para el hogar en Los Guayos, Carabobo.",
+      coffeeCta: "Ver productos",
       whatsappCta: "Pedir por WhatsApp"
     },
     trust: [
       "Pedidos por WhatsApp",
-      "Delivery en Valencia y Los Guayos",
-      "Aceptamos Pago Movil",
+      "Delivery en Los Guayos",
+      "Aceptamos Pago Móvil",
       "Aceptamos Binance",
-      "Opciones de cafe frescas",
-      "Respuesta rapida"
+      "Café y cuidado personal",
+      "Respuesta rápida"
     ],
     story: {
       eyebrow: "Hecho por nosotros",
       title: "Creado por Darren y Francis",
-      body: "Vento Cafe es nuestro pequeno sueno compartido: una marca construida con amor, trabajo y la idea de que una buena taza puede traer calma, conversacion y compania a la rutina diaria.",
+      body: "Vento Café & Market es nuestro proyecto de pareja: café, productos útiles y atención cercana para familias en Los Guayos.",
       cta: "Conoce nuestra historia"
     },
     coffee: {
-      eyebrow: "Nuestro cafe",
-      title: "Favoritos sencillos para cada dia",
-      body: "Cafe rico y facil de preparar, escogido para tus mananas, pausas y momentos compartidos.",
-      flavor: "Como se siente",
-      prepare: "Como prepararlo",
+      eyebrow: "Productos",
+      title: "Café, cuidado personal y ofertas para tu casa",
+      body: "Compra café, cappuccino, shampoos, cremas, body wash y productos de cuidado diario. Escríbenos para confirmar disponibilidad y precio.",
+      flavor: "Bueno para",
+      prepare: "Detalles",
       price: "Consultar precio",
-      order: "Pedir este cafe",
-      all: "Ver todos los cafes"
+      order: "Consultar por WhatsApp",
+      all: "Ver todos los productos",
+      filters: {
+        all: "Todos",
+        coffee: "Café",
+        hair: "Cuidado del cabello",
+        body: "Cuidado personal",
+        lotions: "Cremas",
+        offers: "Ofertas"
+      }
     },
     lifestyle: {
-      eyebrow: "Nuestra vida",
-      title: "Momentos reales detras de Vento",
-      body: "Viajes, naturaleza, familia y esas pausas sencillas que se disfrutan mejor con cafe."
+      eyebrow: "Vida diaria",
+      title: "Productos reales, servicio local",
+      body: "Vento reúne café, cuidado personal y artículos útiles para la rutina de casa."
     },
     order: {
-      eyebrow: "Pide facil",
-      title: "Como hacer tu pedido",
+      eyebrow: "Pide fácil",
+      title: "Cómo hacer tu pedido",
       steps: [
-        "Elige tu cafe",
-        "Escribenos por WhatsApp",
-        "Confirma la entrega en Valencia o Los Guayos",
-        "Paga con Pago Movil o Binance",
-        "Recibe tu cafe"
+        "Elige tus productos",
+        "Escríbenos por WhatsApp",
+        "Confirma disponibilidad y delivery en Los Guayos",
+        "Paga con Pago Móvil o Binance",
+        "Recibe tu pedido"
       ],
-      cta: "Pedir cafe ahora"
+      cta: "Pedir ahora"
     },
     delivery: {
       eyebrow: "Entrega local",
-      title: "Delivery en Valencia y Los Guayos",
-      body: "Actualmente entregamos en Valencia y Los Guayos, Carabobo. Escribenos por WhatsApp para confirmar disponibilidad en tu zona.",
+      title: "Delivery en Los Guayos",
+      body: "Actualmente entregamos en Los Guayos, Carabobo. Escríbenos por WhatsApp para confirmar disponibilidad en tu zona.",
       cta: "Confirmar mi zona"
     },
     payment: {
       eyebrow: "Pago sencillo",
       title: "Paga online",
-      body: "Elige Pago Movil o Binance. Te compartimos los datos finales por WhatsApp antes de pagar.",
-      pago: "Pago Movil Venezuela",
+      body: "Elige Pago Móvil o Binance. Te compartimos los datos finales por WhatsApp antes de pagar.",
+      pago: "Pago Móvil Venezuela",
       binance: "Binance Pay",
       scan: "Escanea para pagar",
       placeholder: "QR de muestra",
-      instructions: "Confirma el monto con nosotros, escanea el codigo y envia tu comprobante.",
-      cta: "Abrir modo de pago rapido"
+      instructions: "Confirma el monto con nosotros, escanea el código y envía tu comprobante.",
+      cta: "Abrir pago rápido"
     },
     social: {
       eyebrow: "Desde el camino",
       title: "Sigue nuestro camino",
-      body: "Acompanamos mientras construimos Vento Cafe, una taza y un dia a la vez.",
+      body: "Acompáñanos mientras construimos Vento Café & Market con productos, momentos reales y servicio local.",
       cta: "Seguir en Instagram",
-      placeholder: "Instagram proximamente"
+      placeholder: "Instagram próximamente"
     },
     contact: {
       eyebrow: "Hablemos",
-      title: "Tu proximo cafe empieza aqui",
-      body: "Escribenos para consultar productos, disponibilidad y delivery en Valencia y Los Guayos.",
+      title: "Pide productos por WhatsApp",
+      body: "Escríbenos para consultar café, cuidado personal, disponibilidad y delivery en Los Guayos.",
       whatsapp: "Escribir por WhatsApp",
       instagram: "Visitar Instagram"
     },
     pay: {
-      eyebrow: "Vento Cafe Quick Pay",
-      title: "Escanea, paga y muestranos la confirmacion.",
-      select: "Selecciona un metodo",
-      paid: "Ya pague, confirmar por WhatsApp",
-      message: "Hola Vento Cafe, ya realice el pago. Aqui esta mi confirmacion.",
-      back: "Volver a Vento Cafe",
-      received: "Confirmacion de pago por WhatsApp"
+      eyebrow: "Vento Quick Pay",
+      title: "Escanea, paga y muéstranos la confirmación.",
+      select: "Selecciona un método",
+      paid: "Ya pagué, confirmar por WhatsApp",
+      message: "Hola Vento Café & Market, ya realicé el pago. Aquí está mi confirmación.",
+      back: "Volver a Vento",
+      received: "Confirmación de pago por WhatsApp"
     },
-    floating: "Pedir Cafe Ahora",
-    whatsappOrder: "Hola Vento Cafe, quiero hacer un pedido de cafe.",
+    floating: "Pedir ahora",
+    whatsappOrder: "Hola Vento Café & Market, quiero hacer un pedido.",
     footer: {
-      line: "Cafe, conexion y cultura, hecho por una pareja real.",
-      delivery: "Delivery en Valencia y Los Guayos, Carabobo.",
-      rights: "Vento Cafe. Hecho con calidez entre Venezuela y Trinidad."
+      line: "Café, cuidado personal y productos útiles para la casa.",
+      delivery: "Delivery en Los Guayos, Carabobo.",
+      rights: "Vento Café & Market. Hecho con cariño en Venezuela."
     }
   },
   en: {
     nav: {
       home: "Home",
       story: "Our Story",
-      coffee: "Our Coffee",
+      coffee: "Products",
       pay: "Pay",
       contact: "Contact",
       menu: "Menu",
       close: "Close"
     },
     hero: {
-      eyebrow: "Coffee made with care in Carabobo",
-      title: "Coffee. Connection. Culture.",
-      subtitle: "Built with warmth from Venezuela and Trinidad.",
-      business: "We sell premium instant coffee and cappuccino mixes in Valencia and Los Guayos, Carabobo.",
-      coffeeCta: "Explore Our Coffee",
+      eyebrow: "Vento Café & Market in Carabobo",
+      title: "Coffee. Care. Home.",
+      subtitle: "Useful products for your daily routine.",
+      business: "We sell coffee, personal care, and household essentials in Los Guayos, Carabobo.",
+      coffeeCta: "View products",
       whatsappCta: "Order on WhatsApp"
     },
     trust: [
       "WhatsApp ordering",
-      "Delivery in Valencia and Los Guayos",
-      "Pago Movil accepted",
+      "Delivery in Los Guayos",
+      "Pago Móvil accepted",
       "Binance accepted",
-      "Fresh coffee options",
+      "Coffee and personal care",
       "Fast response"
     ],
     story: {
       eyebrow: "Made by us",
       title: "Built by Darren and Francis",
-      body: "Vento Cafe is our small shared dream: a brand built with love, work, and the belief that a good cup can bring calm, conversation and company to an ordinary day.",
+      body: "Vento Café & Market is our couple-built project: coffee, useful products, and close service for families in Los Guayos.",
       cta: "Read our story"
     },
     coffee: {
-      eyebrow: "Our coffee",
-      title: "Simple favorites for every day",
-      body: "Good, easy coffee chosen for mornings, quiet breaks and moments shared together.",
-      flavor: "What it feels like",
-      prepare: "How to make it",
+      eyebrow: "Products",
+      title: "Coffee, personal care, and offers for home",
+      body: "Shop coffee, cappuccino, shampoos, lotions, body wash, and daily care products. Message us to confirm availability and price.",
+      flavor: "Good for",
+      prepare: "Details",
       price: "Ask for price",
-      order: "Order this coffee",
-      all: "See all coffee"
+      order: "Ask on WhatsApp",
+      all: "See all products",
+      filters: {
+        all: "All",
+        coffee: "Coffee",
+        hair: "Hair Care",
+        body: "Body Care",
+        lotions: "Lotions",
+        offers: "Offers"
+      }
     },
     lifestyle: {
-      eyebrow: "Our life",
-      title: "The real moments behind Vento",
-      body: "Travel, nature, family and the simple pauses that feel better with coffee."
+      eyebrow: "Daily life",
+      title: "Real products, local service",
+      body: "Vento brings together coffee, personal care, and useful items for home routines."
     },
     order: {
       eyebrow: "Easy ordering",
       title: "How to order",
       steps: [
-        "Choose your coffee",
+        "Choose your products",
         "Message us on WhatsApp",
-        "Confirm delivery in Valencia or Los Guayos",
-        "Pay with Pago Movil or Binance",
-        "Receive your coffee"
+        "Confirm availability and delivery in Los Guayos",
+        "Pay with Pago Móvil or Binance",
+        "Receive your order"
       ],
-      cta: "Order coffee now"
+      cta: "Order now"
     },
     delivery: {
       eyebrow: "Local delivery",
-      title: "Delivery in Valencia and Los Guayos",
-      body: "We currently deliver in Valencia and Los Guayos, Carabobo. Message us on WhatsApp to confirm availability in your area.",
+      title: "Delivery in Los Guayos",
+      body: "We currently deliver in Los Guayos, Carabobo. Message us on WhatsApp to confirm availability in your area.",
       cta: "Check my area"
     },
     payment: {
       eyebrow: "Simple payment",
       title: "Pay online",
-      body: "Choose Pago Movil or Binance. We will confirm the final details on WhatsApp before you pay.",
-      pago: "Pago Movil Venezuela",
+      body: "Choose Pago Móvil or Binance. We will confirm the final details on WhatsApp before you pay.",
+      pago: "Pago Móvil Venezuela",
       binance: "Binance Pay",
       scan: "Scan to pay",
       placeholder: "Sample QR",
       instructions: "Confirm the amount with us, scan the code and send your receipt.",
-      cta: "Open quick pay mode"
+      cta: "Open quick pay"
     },
     social: {
       eyebrow: "From the journey",
       title: "Follow our journey",
-      body: "Come along as we build Vento Cafe, one cup and one day at a time.",
+      body: "Come along as we build Vento Café & Market with products, real moments, and local service.",
       cta: "Follow on Instagram",
       placeholder: "Instagram coming soon"
     },
     contact: {
       eyebrow: "Let us talk",
-      title: "Your next coffee starts here",
-      body: "Message us about products, availability and delivery in Valencia and Los Guayos.",
+      title: "Order products on WhatsApp",
+      body: "Message us about coffee, personal care, availability, and delivery in Los Guayos.",
       whatsapp: "Message on WhatsApp",
       instagram: "Visit Instagram"
     },
     pay: {
-      eyebrow: "Vento Cafe Quick Pay",
+      eyebrow: "Vento Quick Pay",
       title: "Scan, pay, and show us your confirmation.",
       select: "Select a method",
       paid: "I Paid, Confirm on WhatsApp",
-      message: "Hi Vento Cafe, I completed my payment. Here is my confirmation.",
-      back: "Back to Vento Cafe",
+      message: "Hi Vento Café & Market, I completed my payment. Here is my confirmation.",
+      back: "Back to Vento",
       received: "Payment confirmation through WhatsApp"
     },
-    floating: "Order Coffee Now",
-    whatsappOrder: "Hi Vento Cafe, I would like to order coffee.",
+    floating: "Order now",
+    whatsappOrder: "Hi Vento Café & Market, I would like to place an order.",
     footer: {
-      line: "Coffee and connection, built by a real couple.",
-      delivery: "Delivery in Valencia and Los Guayos, Carabobo.",
-      rights: "Vento Cafe. Crafted with warmth from Venezuela and Trinidad."
+      line: "Coffee, personal care, and useful home products.",
+      delivery: "Delivery in Los Guayos, Carabobo.",
+      rights: "Vento Café & Market. Built with care in Venezuela."
     }
   }
 } as const;

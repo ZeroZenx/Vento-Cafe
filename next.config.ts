@@ -6,6 +6,15 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"]
+  },
+  async redirects() {
+    return [
+      {
+        source: "/our-coffee",
+        destination: "/products",
+        permanent: false
+      }
+    ];
   }
 };
 
