@@ -26,8 +26,8 @@ export const productFilters = [
 export const featuredProductIds = [
   "nescafe-clasico",
   "colcafe-cappuccino-caramelo",
-  "jergens-lotions",
-  "white-rain-body-wash"
+  "ultra-hair-care",
+  "xtracare-lotion-collection"
 ];
 
 export const products: Product[] = [
@@ -108,198 +108,176 @@ export const products: Product[] = [
     price: "Precio por WhatsApp"
   },
   {
-    id: "soft-silky-mango",
+    id: "ultra-hair-care",
     category: "hair",
-    offer: true,
-    name: { es: "Soft & Silky Mango Passion", en: "Soft & Silky Mango Passion" },
-    image: "/products/market/soft-silky-mango-offer.jpg",
+    name: { es: "Ultra Cuidado del Cabello", en: "Ultra Hair Care Collection" },
+    image: "/products/market/ultra-hair-care-collection.jpg",
     description: {
-      es: "Set promocional de shampoo, acondicionador y crema para el cabello.",
-      en: "Promotional shampoo, conditioner, and hair lotion set."
+      es: "Colección Ultra de shampoo y acondicionador en varias fórmulas frutales.",
+      en: "Ultra shampoo and conditioner collection in several fruit-based formulas."
     },
     highlights: {
-      es: ["Cuidado del cabello", "Set promocional", "Oferta"],
-      en: ["Hair care", "Promotional set", "Offer"]
+      es: ["Fresa", "Aloe", "Oliva", "Manteca de karité"],
+      en: ["Strawberry", "Aloe", "Olive", "Shea butter"]
     },
     details: {
-      es: ["Pregunta por unidades disponibles.", "Ideal para uso familiar.", "Entrega local en Los Guayos."],
-      en: ["Ask about available units.", "Good for family use.", "Local delivery in Los Guayos."]
+      es: ["Pregunta por fragancia disponible.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about available scent.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
     },
     price: "Precio por WhatsApp"
   },
   {
-    id: "soft-silky-colour-safe",
-    category: "hair",
-    offer: true,
-    name: { es: "Soft & Silky Colour Safe", en: "Soft & Silky Colour Safe" },
-    image: "/products/market/soft-silky-colour-safe-offer.jpg",
+    id: "xtracare-lotion-collection",
+    category: "lotions",
+    name: { es: "XtraCare Cremas para la Piel", en: "XtraCare Skin Care Lotions" },
+    image: "/products/market/xtracare-lotion-collection.jpg",
     description: {
-      es: "Shampoo y acondicionador para cabello teñido, con crema para el cabello incluida.",
-      en: "Shampoo and conditioner for color-treated hair, with hair lotion included."
+      es: "Cremas XtraCare para hidratación diaria y piel seca.",
+      en: "XtraCare lotions for daily moisture and dry skin care."
     },
     highlights: {
-      es: ["Cabello teñido", "Set completo", "Oferta"],
-      en: ["Color-treated hair", "Full set", "Offer"]
+      es: ["Sweet Pea Blossom", "Aloe Vera", "Cocoa & Shea Butter", "Cherry Almond"],
+      en: ["Sweet Pea Blossom", "Aloe Vera", "Cocoa & Shea Butter", "Cherry Almond"]
     },
     details: {
-      es: ["Confirma disponibilidad por WhatsApp.", "Fotos reales del producto.", "Entrega en Los Guayos."],
-      en: ["Confirm availability on WhatsApp.", "Real product photos.", "Delivery in Los Guayos."]
+      es: ["Consulta la fórmula disponible.", "Pedido por WhatsApp.", "Entrega local."],
+      en: ["Ask about available formula.", "Order on WhatsApp.", "Local delivery."]
     },
     price: "Precio por WhatsApp"
   },
   {
-    id: "body-element-sets",
+    id: "white-rain-verbena-violet",
     category: "hair",
-    offer: true,
-    name: { es: "Body Element Shampoo y Acondicionador", en: "Body Element Shampoo and Conditioner" },
-    image: "/products/market/body-element-aloe-set.jpg",
+    name: { es: "White Rain Verbena y Violeta", en: "White Rain Verbena & Violet" },
+    image: "/products/market/white-rain-verbena-violet.jpg",
     description: {
-      es: "Sets Body Element en varias fragancias para cuidado diario del cabello.",
-      en: "Body Element sets in several scents for daily hair care."
+      es: "Shampoo y acondicionador White Rain con fragancia de verbena y violeta.",
+      en: "White Rain shampoo and conditioner with a verbena and violet fragrance."
     },
     highlights: {
-      es: ["Aloe", "Vainilla", "Pink Grapefruit"],
-      en: ["Aloe", "Vanilla", "Pink Grapefruit"]
+      es: ["Shampoo", "Acondicionador", "Verbena", "Violeta"],
+      en: ["Shampoo", "Conditioner", "Verbena", "Violet"]
     },
     details: {
-      es: ["Pregunta por fragancias disponibles.", "Set promocional.", "Entrega local."],
-      en: ["Ask about available scents.", "Promotional set.", "Local delivery."]
+      es: ["Pregunta por unidades disponibles.", "Confirma precio por WhatsApp.", "Entrega en Los Guayos."],
+      en: ["Ask about available units.", "Confirm price on WhatsApp.", "Delivery in Los Guayos."]
     },
     price: "Precio por WhatsApp"
   },
   {
-    id: "fruit-tree-care",
+    id: "fruit-tree-collection",
     category: "body",
     offer: true,
     name: { es: "Fruit Tree Cuidado Personal", en: "Fruit Tree Personal Care" },
-    image: "/products/market/fruit-tree-cucumber-set.jpg",
+    image: "/products/market/fruit-tree-personal-care.jpg",
     description: {
-      es: "Shampoo, acondicionador y loción Fruit Tree en empaque promocional.",
-      en: "Fruit Tree shampoo, conditioner, and lotion in a promotional package."
+      es: "Shampoo, acondicionador y loción Fruit Tree en fórmulas de pepino y flores.",
+      en: "Fruit Tree shampoo, conditioner, and lotion in cucumber and floral formulas."
     },
     highlights: {
-      es: ["Cucumber", "Kiwi Papaya", "Chelsea Flowers"],
-      en: ["Cucumber", "Kiwi Papaya", "Chelsea Flowers"]
+      es: ["Pepino", "Chelsea Flowers", "Shampoo", "Loción"],
+      en: ["Cucumber", "Chelsea Flowers", "Shampoo", "Lotion"]
     },
     details: {
-      es: ["Varía por disponibilidad.", "Consulta precio por WhatsApp.", "Entrega en Los Guayos."],
-      en: ["Availability varies.", "Ask for price on WhatsApp.", "Delivery in Los Guayos."]
+      es: ["Oferta sujeta a inventario.", "Consulta precio por WhatsApp.", "Entrega en Los Guayos."],
+      en: ["Offer subject to inventory.", "Ask for price on WhatsApp.", "Delivery in Los Guayos."]
     },
     price: "Precio por WhatsApp"
   },
   {
-    id: "players-strawberry",
+    id: "white-rain-vanilla-shea",
+    category: "hair",
+    name: { es: "White Rain Vainilla y Manteca de Karité", en: "White Rain Vanilla & Shea Butter" },
+    image: "/products/market/white-rain-vanilla-shea-butter.jpg",
+    description: {
+      es: "Shampoo y acondicionador White Rain con vainilla y manteca de karité.",
+      en: "White Rain shampoo and conditioner with vanilla and shea butter."
+    },
+    highlights: {
+      es: ["Shampoo", "Acondicionador", "Vainilla", "Manteca de karité"],
+      en: ["Shampoo", "Conditioner", "Vanilla", "Shea butter"]
+    },
+    details: {
+      es: ["Pregunta por unidades disponibles.", "Confirma precio por WhatsApp.", "Entrega local."],
+      en: ["Ask about available units.", "Confirm price on WhatsApp.", "Local delivery."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "body-element-collection",
     category: "hair",
     offer: true,
-    name: { es: "Players Strawberry Shampoo y Conditioner", en: "Players Strawberry Shampoo and Conditioner" },
-    image: "/products/market/players-strawberry-set.jpg",
+    name: { es: "Body Element Toronja y Vainilla", en: "Body Element Grapefruit & Vanilla" },
+    image: "/products/market/body-element-grapefruit-vanilla.jpg",
     description: {
-      es: "Set Players de fresa para lavar y acondicionar el cabello.",
-      en: "Players strawberry set for shampoo and conditioner care."
+      es: "Sets Body Element de shampoo y acondicionador en toronja rosada y vainilla.",
+      en: "Body Element shampoo and conditioner sets in pink grapefruit and vanilla."
     },
     highlights: {
-      es: ["Fresa", "Shampoo", "Acondicionador"],
-      en: ["Strawberry", "Shampoo", "Conditioner"]
+      es: ["Toronja rosada", "Vainilla", "Shampoo", "Acondicionador"],
+      en: ["Pink grapefruit", "Vanilla", "Shampoo", "Conditioner"]
     },
     details: {
-      es: ["Pregunta por tamaño disponible.", "Producto sujeto a inventario.", "Pedido por WhatsApp."],
-      en: ["Ask about available size.", "Subject to inventory.", "Order on WhatsApp."]
+      es: ["Oferta sujeta a inventario.", "Pregunta por fragancia disponible.", "Entrega local."],
+      en: ["Offer subject to inventory.", "Ask about available scent.", "Local delivery."]
     },
     price: "Precio por WhatsApp"
   },
   {
-    id: "caribbean-players-care",
+    id: "personal-care-lotions",
+    category: "lotions",
+    name: { es: "Cremas Personal Care", en: "Personal Care Lotions" },
+    image: "/products/market/personal-care-lotion-collection.jpg",
+    description: {
+      es: "Cremas Personal Care de manteca de karité, cocoa y vitamina E.",
+      en: "Personal Care lotions with shea butter, cocoa butter, and vitamin E."
+    },
+    highlights: {
+      es: ["Manteca de karité", "Cocoa", "Vitamina E"],
+      en: ["Shea butter", "Cocoa butter", "Vitamin E"]
+    },
+    details: {
+      es: ["Consulta la fórmula disponible.", "Pedido por WhatsApp.", "Entrega en Los Guayos."],
+      en: ["Ask about available formula.", "Order on WhatsApp.", "Delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "soft-silky-fruit-collection",
     category: "hair",
     offer: true,
-    name: { es: "Caribbean Players Hair Care", en: "Caribbean Players Hair Care" },
-    image: "/products/market/caribbean-players-care-set.jpg",
+    name: { es: "Soft & Silky Colección Frutal", en: "Soft & Silky Fruit Collection" },
+    image: "/products/market/soft-silky-fruit-collection.jpg",
     description: {
-      es: "Shampoo, acondicionador y crema hidratante para el cabello.",
-      en: "Shampoo, conditioner, and hair moisturizer."
+      es: "Sets Soft & Silky de shampoo, acondicionador y loción para el cabello.",
+      en: "Soft & Silky shampoo, conditioner, and hair lotion sets."
     },
     highlights: {
-      es: ["Cabello natural", "Cuidado diario", "Oferta"],
-      en: ["Natural hair", "Daily care", "Offer"]
+      es: ["Durazno", "Mango", "Toronja", "Loción con aceite"],
+      en: ["Peach", "Mango", "Grapefruit", "Oil lotion"]
     },
     details: {
-      es: ["Consulta disponibilidad.", "Fotos reales.", "Entrega local."],
-      en: ["Check availability.", "Real photos.", "Local delivery."]
+      es: ["Oferta sujeta a inventario.", "Pregunta por fragancia disponible.", "Entrega en Los Guayos."],
+      en: ["Offer subject to inventory.", "Ask about available scent.", "Delivery in Los Guayos."]
     },
     price: "Precio por WhatsApp"
   },
   {
-    id: "jergens-lotions",
-    category: "lotions",
-    name: { es: "Jergens Cremas Corporales", en: "Jergens Body Lotions" },
-    image: "/products/market/jergens-small-lotions.jpg",
+    id: "white-rain-pomegranate",
+    category: "hair",
+    name: { es: "White Rain Granada", en: "White Rain Pomegranate" },
+    image: "/products/market/white-rain-pomegranate.jpg",
     description: {
-      es: "Cremas Jergens para hidratación diaria en varias fórmulas.",
-      en: "Jergens lotions for daily moisturizing in several formulas."
+      es: "Shampoo y acondicionador White Rain con fragancia de granada.",
+      en: "White Rain shampoo and conditioner with a pomegranate fragrance."
     },
     highlights: {
-      es: ["Daily Moisture", "Age Defying", "Ultra Healing"],
-      en: ["Daily Moisture", "Age Defying", "Ultra Healing"]
+      es: ["Shampoo", "Acondicionador", "Granada"],
+      en: ["Shampoo", "Conditioner", "Pomegranate"]
     },
     details: {
-      es: ["Pregunta por fórmula y tamaño.", "Disponibilidad cambia por inventario.", "Entrega en Los Guayos."],
-      en: ["Ask about formula and size.", "Availability changes by inventory.", "Delivery in Los Guayos."]
-    },
-    price: "Precio por WhatsApp"
-  },
-  {
-    id: "xtracare-lotions",
-    category: "lotions",
-    name: { es: "XtraCare Skin Care Lotion", en: "XtraCare Skin Care Lotion" },
-    image: "/products/market/xtracare-lotions.jpg",
-    description: {
-      es: "Cremas XtraCare para piel seca, aloe vera y cuidado diario.",
-      en: "XtraCare lotions for dry skin, aloe vera, and daily care."
-    },
-    highlights: {
-      es: ["Aloe Vera", "Intensive Moisture", "Vitamina y avena"],
-      en: ["Aloe Vera", "Intensive Moisture", "Vitamin and oatmeal"]
-    },
-    details: {
-      es: ["Consulta el tipo disponible.", "Pedido por WhatsApp.", "Entrega local."],
-      en: ["Ask about available type.", "Order on WhatsApp.", "Local delivery."]
-    },
-    price: "Precio por WhatsApp"
-  },
-  {
-    id: "white-rain-body-wash",
-    category: "body",
-    name: { es: "White Rain Body Wash", en: "White Rain Body Wash" },
-    image: "/products/market/white-rain-body-wash-colors.jpg",
-    description: {
-      es: "Body wash White Rain en varias fragancias para uso diario.",
-      en: "White Rain body wash in several scents for daily use."
-    },
-    highlights: {
-      es: ["Ocean Mist", "Coconut & Hibiscus", "Energizing Citrus"],
-      en: ["Ocean Mist", "Coconut & Hibiscus", "Energizing Citrus"]
-    },
-    details: {
-      es: ["Pregunta por fragancias disponibles.", "Consulta precio por WhatsApp.", "Entrega en Los Guayos."],
-      en: ["Ask about available scents.", "Ask for price on WhatsApp.", "Delivery in Los Guayos."]
-    },
-    price: "Precio por WhatsApp"
-  },
-  {
-    id: "white-rain-botanicals",
-    category: "body",
-    name: { es: "White Rain Botanicals Body Wash", en: "White Rain Botanicals Body Wash" },
-    image: "/products/market/white-rain-body-wash-botanicals.jpg",
-    description: {
-      es: "Body wash White Rain con fórmulas botánicas para la rutina diaria.",
-      en: "White Rain body wash with botanical formulas for daily routines."
-    },
-    highlights: {
-      es: ["Aloe", "Verbena", "Vainilla"],
-      en: ["Aloe", "Verbena", "Vanilla"]
-    },
-    details: {
-      es: ["Varía por inventario.", "Pregunta por opciones disponibles.", "Pedido por WhatsApp."],
-      en: ["Varies by inventory.", "Ask about available options.", "Order on WhatsApp."]
+      es: ["Pregunta por unidades disponibles.", "Confirma precio por WhatsApp.", "Entrega local."],
+      en: ["Ask about available units.", "Confirm price on WhatsApp.", "Local delivery."]
     },
     price: "Precio por WhatsApp"
   }

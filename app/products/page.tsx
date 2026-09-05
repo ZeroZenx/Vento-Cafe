@@ -6,7 +6,7 @@ import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Browse Vento Café & Market coffee, personal care, body wash, lotions, and household essentials for WhatsApp ordering in Los Guayos, Carabobo."
+    "Browse Vento Café & Market coffee, hair care, lotions, and personal care collections for WhatsApp ordering in Los Guayos, Carabobo."
 };
 
 export default function ProductsPage() {
@@ -19,16 +19,16 @@ export default function ProductsPage() {
             Café, cuidado personal y productos para pedir fácil.
           </h1>
           <p className="mt-5 text-base leading-relaxed text-matte/75">
-            Tenemos café, cappuccino, shampoos, cremas, body wash y ofertas para el hogar.
+            Tenemos café, cappuccino, shampoos, acondicionadores, cremas y lociones para el cuidado diario.
             Escríbenos por WhatsApp para confirmar disponibilidad, precio y entrega en Los Guayos.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {[
-            { src: "/products/market/jergens-small-lotions.jpg", alt: "Jergens lotions for sale" },
-            { src: "/products/market/white-rain-body-wash-colors.jpg", alt: "White Rain body wash for sale" },
+            { src: "/products/market/xtracare-lotion-collection.jpg", alt: "XtraCare skin care lotion collection" },
+            { src: "/products/market/white-rain-verbena-violet.jpg", alt: "White Rain Verbena and Violet hair care" },
             { src: "/products/nescafe-clasico.png", alt: "Nescafe Clasico coffee for sale" },
-            { src: "/products/market/soft-silky-mango-offer.jpg", alt: "Soft and Silky hair care set for sale" }
+            { src: "/products/market/soft-silky-fruit-collection.jpg", alt: "Soft and Silky fruit hair care collection" }
           ].map((image) => (
             <div
               key={image.src}
@@ -39,7 +39,7 @@ export default function ProductsPage() {
                 alt={image.alt}
                 fill
                 sizes="(max-width: 1024px) 50vw, 22vw"
-                className={image.src.includes("/products/market/") ? "object-cover" : "object-contain p-4"}
+                className={image.src.includes("/products/market/") ? "object-contain p-3" : "object-contain p-4"}
               />
             </div>
           ))}

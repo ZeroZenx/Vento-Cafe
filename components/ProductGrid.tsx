@@ -87,7 +87,7 @@ export function ProductGrid({ compact = false }: ProductGridProps) {
                 <SafeImage
                   src={product.image}
                   alt={productName}
-                  variant={product.category === "coffee" ? "product" : "landscape"}
+                  variant="product"
                   sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 24vw"
                 />
                 {product.offer && (

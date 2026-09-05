@@ -10,5 +10,5 @@ export const lifestyleImages: LifestyleImage[] = [
   { src: "/founders/founders-formal-black.jpg", shape: "portrait", variant: "portrait" },
   { src: "/brand/vento-cup-counter.jpg", shape: "landscape", variant: "landscape" },
   { src: "/brand/vento-logo-counter.jpg", shape: "landscape", variant: "landscape" },
-  { src: "/products/market/white-rain-body-wash-botanicals.jpg", shape: "portrait", variant: "landscape" }
+  { src: "/products/market/white-rain-pomegranate.jpg", shape: "portrait", variant: "product" }
 ];

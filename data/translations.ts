@@ -37,7 +37,7 @@ export const translations = {
     coffee: {
       eyebrow: "Productos",
       title: "Café, cuidado personal y ofertas para tu casa",
-      body: "Compra café, cappuccino, shampoos, cremas, body wash y productos de cuidado diario. Escríbenos para confirmar disponibilidad y precio.",
+      body: "Compra café, cappuccino, shampoos, acondicionadores, cremas y lociones para el cuidado diario. Escríbenos para confirmar disponibilidad y precio.",
       flavor: "Bueno para",
       prepare: "Detalles",
       price: "Consultar precio",
@@ -152,7 +152,7 @@ export const translations = {
     coffee: {
       eyebrow: "Products",
       title: "Coffee, personal care, and offers for home",
-      body: "Shop coffee, cappuccino, shampoos, lotions, body wash, and daily care products. Message us to confirm availability and price.",
+      body: "Shop coffee, cappuccino, shampoos, conditioners, lotions, and daily personal care products. Message us to confirm availability and price.",
       flavor: "Good for",
       prepare: "Details",
       price: "Ask for price",
