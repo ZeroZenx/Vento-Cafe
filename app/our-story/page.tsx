@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { InnerPageHero } from "@/components/InnerPageHero";
 import { StorySection } from "@/components/StorySection";
+import { StoryGallery } from "@/components/StoryGallery";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export default function OurStoryPage() {
     <>
       <InnerPageHero page="story" />
       <StorySection />
+      <StoryGallery />
       <WhatsAppCTA />
     </>
   );

@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Coffee, Languages, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export function Navbar() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const navLinks = [
@@ -18,8 +16,6 @@ export function Navbar() {
     { label: t.nav.pay, href: "/pay" },
     { label: t.nav.contact, href: "/contact" }
   ];
-  const isPayPage = pathname === "/pay";
-
   return (
     <header className="sticky top-0 z-50 border-b border-espresso/10 bg-[#fbf6ec]/90 backdrop-blur-xl">
       <nav className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-4 sm:px-8">
@@ -30,7 +26,7 @@ export function Navbar() {
           <span className="text-lg font-semibold tracking-[-0.02em] text-espresso">Vento Café & Market</span>
         </Link>
 
-        <ul className={`${isPayPage ? "hidden" : "hidden lg:flex"} items-center gap-6`}>
+        <ul className="hidden items-center gap-6 lg:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link href={link.href} className="text-sm font-medium text-matte/70 transition hover:text-forest">
@@ -57,22 +53,20 @@ export function Navbar() {
               </button>
             ))}
           </div>
-          {!isPayPage && (
-            <button
-              type="button"
-              aria-label={open ? t.nav.close : t.nav.menu}
-              aria-expanded={open}
-              className="grid h-11 w-11 place-items-center rounded-full border border-espresso/15 text-espresso lg:hidden"
-              onClick={() => setOpen((current) => !current)}
-            >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          )}
+          <button
+            type="button"
+            aria-label={open ? t.nav.close : t.nav.menu}
+            aria-expanded={open}
+            className="grid h-11 w-11 place-items-center rounded-full border border-espresso/15 text-espresso lg:hidden"
+            onClick={() => setOpen((current) => !current)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </nav>
 
       <AnimatePresence>
-        {open && !isPayPage && (
+        {open && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
