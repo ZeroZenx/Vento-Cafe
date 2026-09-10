@@ -10,7 +10,7 @@ const images = [
   { src: "/brand/vento-logo-counter.jpg", variant: "landscape" as const },
   { src: "/products/market/ultra-hair-care-collection.jpg", variant: "product" as const },
   { src: "/products/market/fruit-tree-personal-care.jpg", variant: "product" as const },
-  { src: "/products/market/personal-care-lotion-collection.jpg", variant: "product" as const },
+  { src: "/products/market/zinc-oxide-10g.png", variant: "product" as const },
   { src: "/products/nescafe-clasico.png", variant: "product" as const }
 ];
 

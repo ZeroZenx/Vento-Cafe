@@ -27,7 +27,7 @@ export const featuredProductIds = [
   "nescafe-clasico",
   "colcafe-cappuccino-caramelo",
   "ultra-hair-care",
-  "xtracare-lotion-collection"
+  "zinc-oxide-10g"
 ];
 
 export const products: Product[] = [
@@ -278,6 +278,25 @@ export const products: Product[] = [
     details: {
       es: ["Pregunta por unidades disponibles.", "Confirma precio por WhatsApp.", "Entrega local."],
       en: ["Ask about available units.", "Confirm price on WhatsApp.", "Local delivery."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "zinc-oxide-10g",
+    category: "lotions",
+    name: { es: "Óxido de Zinc 10 g", en: "Zinc Oxide 10 g" },
+    image: "/products/market/zinc-oxide-10g.png",
+    description: {
+      es: "Presentación de 10 g para cuidado de la piel. Consulta disponibilidad y precio por WhatsApp.",
+      en: "10 g zinc oxide product for skin care. Ask about availability and price on WhatsApp."
+    },
+    highlights: {
+      es: ["Cuidado de la piel", "Presentación 10 g", "Producto compacto"],
+      en: ["Skin care", "10 g size", "Compact product"]
+    },
+    details: {
+      es: ["Revisa la etiqueta antes de usar.", "Consulta disponibilidad.", "Entrega local en Los Guayos."],
+      en: ["Read the label before use.", "Ask about availability.", "Local delivery in Los Guayos."]
     },
     price: "Precio por WhatsApp"
   }

@@ -25,7 +25,7 @@ export default function ProductsPage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {[
-            { src: "/products/market/xtracare-lotion-collection.jpg", alt: "XtraCare skin care lotion collection" },
+            { src: "/products/market/zinc-oxide-10g.png", alt: "Zinc Oxide 10 g" },
             { src: "/products/market/white-rain-verbena-violet.jpg", alt: "White Rain Verbena and Violet hair care" },
             { src: "/products/nescafe-clasico.png", alt: "Nescafe Clasico coffee for sale" },
             { src: "/products/market/soft-silky-fruit-collection.jpg", alt: "Soft and Silky fruit hair care collection" }
