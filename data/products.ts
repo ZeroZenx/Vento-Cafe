@@ -299,5 +299,138 @@ export const products: Product[] = [
       en: ["Read the label before use.", "Ask about availability.", "Local delivery in Los Guayos."]
     },
     price: "Precio por WhatsApp"
+  },
+  {
+    id: "players-strawberry-500ml",
+    category: "hair",
+    name: { es: "Players Fresa Shampoo + Acondicionador 500 ml", en: "Players Strawberry Shampoo & Conditioner 500 ml" },
+    image: "/products/market/players-strawberry-500ml.jpg",
+    description: {
+      es: "Set Players de shampoo y acondicionador de fresa en presentación de 500 ml.",
+      en: "Players strawberry shampoo and conditioner set in 500 ml bottles."
+    },
+    highlights: {
+      es: ["Fresa", "Shampoo y acondicionador", "500 ml"],
+      en: ["Strawberry", "Shampoo and conditioner", "500 ml"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "players-strawberry-250ml",
+    category: "hair",
+    name: { es: "Players Fresa Shampoo + Acondicionador 250 ml", en: "Players Strawberry Shampoo & Conditioner 250 ml" },
+    image: "/products/market/players-strawberry-250ml.jpg",
+    description: {
+      es: "Set Players de shampoo y acondicionador de fresa en presentación de 250 ml.",
+      en: "Players strawberry shampoo and conditioner set in 250 ml bottles."
+    },
+    highlights: {
+      es: ["Fresa", "Shampoo y acondicionador", "250 ml"],
+      en: ["Strawberry", "Shampoo and conditioner", "250 ml"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "players-strawberry-pump-set",
+    category: "hair",
+    name: { es: "Players Fresa Set con Bomba", en: "Players Strawberry Pump Set" },
+    image: "/products/market/players-strawberry-pump-set.jpg",
+    description: {
+      es: "Set Players de fresa con envases de bomba para shampoo y acondicionador.",
+      en: "Players strawberry set with pump bottles for shampoo and conditioner."
+    },
+    highlights: {
+      es: ["Fresa", "Envases con bomba", "Shampoo y acondicionador"],
+      en: ["Strawberry", "Pump bottles", "Shampoo and conditioner"]
+    },
+    details: {
+      es: ["Consulta unidades disponibles.", "Confirma precio por WhatsApp.", "Entrega local."],
+      en: ["Ask about available units.", "Confirm price on WhatsApp.", "Local delivery."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "players-green-apple-set",
+    category: "hair",
+    name: { es: "Players Manzana Verde Set Capilar", en: "Players Green Apple Hair Set" },
+    image: "/products/market/players-green-apple-set.jpg",
+    description: {
+      es: "Set Players de manzana verde con shampoo, acondicionador e hidratante capilar.",
+      en: "Players green apple set with shampoo, conditioner, and hair moisturizer."
+    },
+    highlights: {
+      es: ["Manzana verde", "Shampoo y acondicionador", "Hidratante capilar"],
+      en: ["Green apple", "Shampoo and conditioner", "Hair moisturizer"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "players-strawberry-moisturizer-set",
+    category: "hair",
+    name: { es: "Players Fresa Set con Hidratante Capilar", en: "Players Strawberry Set with Hair Moisturizer" },
+    image: "/products/market/players-strawberry-moisturizer-set.jpg",
+    description: {
+      es: "Set Players de fresa con shampoo, acondicionador e hidratante capilar.",
+      en: "Players strawberry set with shampoo, conditioner, and hair moisturizer."
+    },
+    highlights: {
+      es: ["Fresa", "Shampoo y acondicionador", "Hidratante capilar"],
+      en: ["Strawberry", "Shampoo and conditioner", "Hair moisturizer"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "players-peach-moisturizer-set",
+    category: "hair",
+    name: { es: "Players Durazno Set con Hidratante Capilar", en: "Players Peach Set with Hair Moisturizer" },
+    image: "/products/market/players-peach-moisturizer-set.jpg",
+    description: {
+      es: "Set Players de durazno con shampoo, acondicionador e hidratante capilar.",
+      en: "Players peach set with shampoo, conditioner, and hair moisturizer."
+    },
+    highlights: {
+      es: ["Durazno", "Shampoo y acondicionador", "Hidratante capilar"],
+      en: ["Peach", "Shampoo and conditioner", "Hair moisturizer"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "body-element-pink-grapefruit",
+    category: "hair",
+    name: { es: "Body Element Toronja Rosada", en: "Body Element Pink Grapefruit" },
+    image: "/products/market/body-element-pink-grapefruit.jpg",
+    description: {
+      es: "Set Body Element de toronja rosada con shampoo y acondicionador.",
+      en: "Body Element pink grapefruit set with shampoo and conditioner."
+    },
+    highlights: {
+      es: ["Toronja rosada", "Shampoo y acondicionador", "Body Element"],
+      en: ["Pink grapefruit", "Shampoo and conditioner", "Body Element"]
+    },
+    details: {
+      es: ["Consulta unidades disponibles.", "Confirma precio por WhatsApp.", "Entrega local."],
+      en: ["Ask about available units.", "Confirm price on WhatsApp.", "Local delivery."]
+    },
+    price: "Precio por WhatsApp"
   }
 ];
