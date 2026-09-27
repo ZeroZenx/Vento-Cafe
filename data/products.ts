@@ -27,6 +27,10 @@ export const featuredProductIds = [
   "nescafe-clasico",
   "colcafe-cappuccino-caramelo",
   "ultra-hair-care",
+  "players-strawberry-500ml",
+  "fruit-tree-collection",
+  "xtracare-lotion-collection",
+  "body-element-collection",
   "zinc-oxide-10g"
 ];
 

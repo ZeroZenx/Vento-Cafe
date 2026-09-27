@@ -13,12 +13,14 @@ export const translations = {
       close: "Cerrar"
     },
     hero: {
-      eyebrow: "Vento Café & Market en Carabobo",
-      title: "Café. Cuidado. Hogar.",
-      subtitle: "Productos útiles para tu rutina diaria.",
-      business: "Vendemos café, cuidado personal y productos para el hogar en Los Guayos, Carabobo.",
+      eyebrow: "Vento Café & Market · Los Guayos",
+      title: "Productos para tu rutina.",
+      subtitle: "Café, cuidado personal y esenciales para el hogar.",
+      business: "Explora por categoría, consulta disponibilidad y pide por WhatsApp en un solo lugar.",
       coffeeCta: "Ver productos",
-      whatsappCta: "Pedir por WhatsApp"
+      whatsappCta: "Pedir por WhatsApp",
+      browse: "Café · cabello · cuidado personal · hogar",
+      shelf: "Selección Vento"
     },
     trust: [
       "Pedidos por WhatsApp",
@@ -36,13 +38,19 @@ export const translations = {
     },
     coffee: {
       eyebrow: "Productos",
-      title: "Café, cuidado personal y ofertas para tu casa",
+      title: "Elige lo que necesitas",
       body: "Compra café, cappuccino, shampoos, acondicionadores, cremas y lociones para el cuidado diario. Escríbenos para confirmar disponibilidad y precio.",
       flavor: "Bueno para",
       prepare: "Detalles",
       price: "Consultar precio",
       order: "Consultar por WhatsApp",
       all: "Ver todos los productos",
+      search: "Buscar productos",
+      clearSearch: "Limpiar búsqueda",
+      filterLabel: "Filtrar productos",
+      results: "productos",
+      empty: "No encontramos productos con esa búsqueda.",
+      reset: "Limpiar filtros",
       filters: {
         all: "Todos",
         coffee: "Café",
@@ -128,12 +136,14 @@ export const translations = {
       close: "Close"
     },
     hero: {
-      eyebrow: "Vento Café & Market in Carabobo",
-      title: "Coffee. Care. Home.",
-      subtitle: "Useful products for your daily routine.",
-      business: "We sell coffee, personal care, and household essentials in Los Guayos, Carabobo.",
+      eyebrow: "Vento Café & Market · Los Guayos",
+      title: "Products for your routine.",
+      subtitle: "Coffee, personal care, and home essentials.",
+      business: "Browse by category, check availability, and order on WhatsApp in one place.",
       coffeeCta: "View products",
-      whatsappCta: "Order on WhatsApp"
+      whatsappCta: "Order on WhatsApp",
+      browse: "Coffee · hair care · body care · home",
+      shelf: "Vento selection"
     },
     trust: [
       "WhatsApp ordering",
@@ -151,13 +161,19 @@ export const translations = {
     },
     coffee: {
       eyebrow: "Products",
-      title: "Coffee, personal care, and offers for home",
+      title: "Choose what you need",
       body: "Shop coffee, cappuccino, shampoos, conditioners, lotions, and daily personal care products. Message us to confirm availability and price.",
       flavor: "Good for",
       prepare: "Details",
       price: "Ask for price",
       order: "Ask on WhatsApp",
       all: "See all products",
+      search: "Search products",
+      clearSearch: "Clear search",
+      filterLabel: "Filter products",
+      results: "products",
+      empty: "No products matched your search.",
+      reset: "Clear filters",
       filters: {
         all: "All",
         coffee: "Coffee",

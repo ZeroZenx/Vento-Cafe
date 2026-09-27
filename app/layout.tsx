@@ -9,7 +9,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.websiteUrl),
   title: {
-    default: "Vento Café & Market | Coffee and Essentials in Los Guayos, Carabobo",
+    default: "Vento Café & Market | Products in Los Guayos, Carabobo",
     template: "%s | Vento Café & Market"
   },
   description: siteConfig.descriptionEn,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Vento Café & Market | Coffee and Essentials in Los Guayos, Carabobo",
+    title: "Vento Café & Market | Products in Los Guayos, Carabobo",
     description: siteConfig.descriptionEn,
     url: siteConfig.websiteUrl,
     siteName: siteConfig.name,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vento Café & Market | Coffee and Essentials in Los Guayos, Carabobo",
+    title: "Vento Café & Market | Products in Los Guayos, Carabobo",
     description: siteConfig.descriptionEn,
     images: ["/brand/vento-cup-counter.jpg"]
   },

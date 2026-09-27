@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { Coffee, Languages, Menu, X } from "lucide-react";
+import { Coffee, Languages, Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -10,9 +10,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const navLinks = [
-    { label: t.nav.home, href: "/" },
-    { label: t.nav.story, href: "/our-story" },
-    { label: t.nav.coffee, href: "/products" },
+    { label: t.nav.coffee, href: "/products", primary: true },
+    { label: t.nav.story, href: "/our-story", primary: false },
     { label: t.nav.pay, href: "/pay" },
     { label: t.nav.contact, href: "/contact" }
   ];
@@ -29,7 +28,8 @@ export function Navbar() {
         <ul className="hidden items-center gap-6 lg:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} className="text-sm font-medium text-matte/70 transition hover:text-forest">
+              <Link href={link.href} className={`inline-flex items-center gap-2 text-sm font-semibold transition ${link.primary ? "rounded-lg bg-forest px-3 py-2 text-cream hover:bg-espresso" : "text-matte/70 hover:text-forest"}`}>
+                {link.primary && <ShoppingBag className="h-4 w-4" />}
                 {link.label}
               </Link>
             </li>
