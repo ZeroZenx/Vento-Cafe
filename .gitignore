@@ -21,6 +21,9 @@ pnpm-debug.log*
 # local env files
 .env*.local
 
+# local inventory fallback
+.data/
+
 # vercel
 .vercel
 

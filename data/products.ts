@@ -1,6 +1,6 @@
 import type { LocalizedText } from "@/data/translations";
 
-export type ProductCategory = "coffee" | "hair" | "body" | "lotions";
+export type ProductCategory = "coffee" | "hair" | "body" | "lotions" | "household";
 
 export type Product = {
   id: string;
@@ -20,6 +20,7 @@ export const productFilters = [
   { id: "hair", labelKey: "hair" },
   { id: "body", labelKey: "body" },
   { id: "lotions", labelKey: "lotions" },
+  { id: "household", labelKey: "household" },
   { id: "offers", labelKey: "offers" }
 ] as const;
 

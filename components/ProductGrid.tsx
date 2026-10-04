@@ -7,16 +7,17 @@ import Link from "next/link";
 import { SafeImage } from "@/components/SafeImage";
 import { WhatsAppIcon } from "@/components/BrandIcons";
 import { useLanguage } from "@/components/LanguageProvider";
-import { featuredProductIds, productFilters, products } from "@/data/products";
+import { featuredProductIds, productFilters, products as staticProducts, type Product } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 type ProductGridProps = {
   compact?: boolean;
   showIntro?: boolean;
+  initialProducts?: Product[];
 };
 
-export function ProductGrid({ compact = false, showIntro = true }: ProductGridProps) {
+export function ProductGrid({ compact = false, showIntro = true, initialProducts = staticProducts }: ProductGridProps) {
   const { language, t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<(typeof productFilters)[number]["id"]>("all");
   const [query, setQuery] = useState("");
@@ -24,13 +25,13 @@ export function ProductGrid({ compact = false, showIntro = true }: ProductGridPr
   const visibleProducts = useMemo(() => {
     const filtered = compact
       ? featuredProductIds
-        .map((id) => products.find((product) => product.id === id))
-        .filter((product): product is (typeof products)[number] => Boolean(product))
+        .map((id) => initialProducts.find((product) => product.id === id))
+        .filter((product): product is Product => Boolean(product))
       : activeFilter === "all"
-        ? products
+        ? initialProducts
         : activeFilter === "offers"
-          ? products.filter((product) => product.offer)
-          : products.filter((product) => product.category === activeFilter);
+          ? initialProducts.filter((product) => product.offer)
+          : initialProducts.filter((product) => product.category === activeFilter);
 
     const normalizedQuery = query.trim().toLocaleLowerCase();
     if (!normalizedQuery || compact) return filtered;
@@ -46,7 +47,7 @@ export function ProductGrid({ compact = false, showIntro = true }: ProductGridPr
         .toLocaleLowerCase();
       return searchable.includes(normalizedQuery);
     });
-  }, [activeFilter, compact, language, query]);
+  }, [activeFilter, compact, initialProducts, language, query]);
 
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-8 sm:py-24" id="products">

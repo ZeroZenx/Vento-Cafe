@@ -57,6 +57,7 @@ export const translations = {
         hair: "Cuidado del cabello",
         body: "Cuidado personal",
         lotions: "Cremas",
+        household: "Hogar",
         offers: "Ofertas"
       }
     },
@@ -180,6 +181,7 @@ export const translations = {
         hair: "Hair Care",
         body: "Body Care",
         lotions: "Lotions",
+        household: "Household",
         offers: "Offers"
       }
     },

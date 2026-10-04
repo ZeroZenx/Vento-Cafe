@@ -1,6 +1,6 @@
 # Vento Cafe
 
-A bilingual, mobile-first coffee lifestyle site for a couple-built business serving Valencia and Los Guayos, Carabobo.
+A bilingual, mobile-first product storefront and private inventory workspace for Vento Café & Market in Los Guayos, Carabobo.
 
 ## Phase 1 Features
 
@@ -12,6 +12,9 @@ A bilingual, mobile-first coffee lifestyle site for a couple-built business serv
 - Floating desktop WhatsApp action and sticky mobile order bar
 - Pago Movil and Binance payment information
 - Mobile quick-payment terminal at `/pay`
+- Private inventory workspace at `/admin`
+- Password-protected product, stock, costing, sales, low-stock, and profit tracking
+- PostgreSQL persistence for hosted deployments with a local JSON fallback during development
 - SEO metadata, Open Graph data, local-business schema, sitemap, and robots
 
 ## Stack
@@ -74,6 +77,31 @@ The QR blocks in `/pay` are clearly marked placeholders. Replace `QrPlaceholder`
 
 Vercel automatically rebuilds the production site after each push to `main` when Git integration is enabled.
 
-## Scope
+## Private Inventory Setup
 
-Phase 1 intentionally uses WhatsApp ordering and simple scan-to-pay guidance. It does not include a database, login, cart, payment gateway, or automated checkout.
+Copy `.env.example` to `.env.local` and set:
+
+- `VENTO_ADMIN_PASSWORD`: private admin password
+- `VENTO_ADMIN_SESSION_SECRET`: long random session signing secret
+- `DATABASE_URL`: PostgreSQL connection string for hosted persistence
+- `DATABASE_SSL`: keep `true` for hosted PostgreSQL providers
+
+Open `/admin` to sign in. The public navigation does not expose this route.
+
+The first authenticated inventory request creates the two tables from `db/schema.sql` and seeds the current catalog products with their existing images. New products marked “Show in public catalog” appear on `/products` and the homepage. Cost fields stay private to `/admin`.
+
+Without `DATABASE_URL`, development uses `.data/inventory.json`. Production requires PostgreSQL so sales and stock changes persist across deployments.
+
+## Inventory Calculations
+
+The private workspace calculates:
+
+- Product cost including VAT from the supplier TT$ cost
+- Exact USD product cost at the saved exchange rate
+- Optional rounded-up USD product cost
+- International and inland shipping
+- Landed cost per unit
+- Retail price and gross profit per unit
+- Inventory value, sales revenue, cost of goods, and gross profit
+
+Use stock movements for sales, restocks, and adjustments. Product edits preserve the product record while movement entries provide the sales history.

@@ -4,13 +4,17 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { SocialSection } from "@/components/SocialSection";
 import { TrustStrip } from "@/components/TrustStrip";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
+import { getPublicProducts } from "@/lib/inventory/store";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const publicProducts = await getPublicProducts();
   return (
     <>
       <Hero />
       <TrustStrip />
-      <ProductGrid compact />
+      <ProductGrid compact initialProducts={publicProducts} />
       <WhatsAppCTA />
       <PaymentSection />
       <SocialSection />
