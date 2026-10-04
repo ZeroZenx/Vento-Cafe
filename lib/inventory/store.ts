@@ -219,7 +219,7 @@ function mapTransactionRow(row: Record<string, unknown>): InventoryTransaction {
   };
 }
 
-function viewProduct(product: InventoryProduct): InventoryProductView {
+function viewProduct(product: InventoryProduct, hasInventoryActivity: boolean): InventoryProductView {
   const cost = productCost(product);
   return {
     ...product,
@@ -227,17 +227,19 @@ function viewProduct(product: InventoryProduct): InventoryProductView {
     grossProfitPerUnitUsdCents: cost.landedCostUsdCents !== null && product.salePriceUsdCents !== null
       ? product.salePriceUsdCents - cost.landedCostUsdCents
       : null,
-    lowStock: product.stock <= product.lowStockThreshold
+    hasInventoryActivity,
+    lowStock: hasInventoryActivity && product.stock <= product.lowStockThreshold
   };
 }
 
 function summary(products: InventoryProduct[], transactions: InventoryTransaction[]): InventorySummary {
   const visibleProducts = products.filter((product) => product.active);
+  const activityProductIds = new Set(transactions.map((transaction) => transaction.productId));
   const saleTransactions = transactions.filter((transaction) => transaction.type === "sale");
   return {
     productCount: visibleProducts.length,
     unitsInStock: visibleProducts.reduce((total, product) => total + product.stock, 0),
-    lowStockCount: visibleProducts.filter((product) => product.stock <= product.lowStockThreshold).length,
+    lowStockCount: visibleProducts.filter((product) => activityProductIds.has(product.id) && product.stock <= product.lowStockThreshold).length,
     inventoryValueUsdCents: Math.round(visibleProducts.reduce((total, product) => total + (productCost(product).landedCostUsdCents || 0) * product.stock, 0)),
     salesCount: saleTransactions.length,
     unitsSold: saleTransactions.reduce((total, transaction) => total + transaction.quantity, 0),
@@ -277,8 +279,9 @@ export function formatTtd(cents: number | null): string {
 
 export async function getInventoryData(): Promise<InventoryData> {
   const data = await baseData();
+  const activityProductIds = new Set(data.transactions.map((transaction) => transaction.productId));
   return {
-    products: data.products.filter((product) => product.active).map(viewProduct),
+    products: data.products.filter((product) => product.active).map((product) => viewProduct(product, activityProductIds.has(product.id))),
     transactions: data.transactions,
     summary: summary(data.products, data.transactions)
   };

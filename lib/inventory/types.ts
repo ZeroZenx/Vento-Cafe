@@ -32,6 +32,7 @@ export type InventoryProductView = InventoryProduct & {
   roundedProductCostUsdCents: number | null;
   landedCostUsdCents: number | null;
   grossProfitPerUnitUsdCents: number | null;
+  hasInventoryActivity: boolean;
   lowStock: boolean;
 };
 

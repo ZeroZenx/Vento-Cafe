@@ -25,7 +25,7 @@ export const adminSpanish: Record<string, string> = {
   "Unrecorded expenses excluded from projected profit.": "La ganancia proyectada excluye gastos no registrados.",
   "Potential sales": "Ventas proyectadas", "Potential profit": "Ganancia proyectada",
   "units /": "unidades /", "retail per unit": "precio por unidad",
-  "Low stock": "Existencias bajas", "in stock / low at": "en existencia / mínimo",
+  "Low stock": "Existencias bajas", "in stock / low at": "en existencia / mínimo", "Not stocked yet": "Sin existencias registradas", "Out of stock": "Agotado",
   "Restock": "Reponer", "No low-stock items.": "No hay productos con existencias bajas.",
   "View products": "Ver productos", "Recent transactions": "Movimientos recientes",
   "units": "unidades", "profit": "ganancia", "No transactions recorded.": "No hay movimientos registrados.",
