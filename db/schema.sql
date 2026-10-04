@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS vento_inventory_products (
   vat_rate_bps INTEGER NOT NULL DEFAULT 1200,
   exchange_rate NUMERIC(10, 4) NOT NULL DEFAULT 6.8,
   shipping_usd_cents INTEGER NOT NULL DEFAULT 0,
-  inland_shipping_usd_cents INTEGER NOT NULL DEFAULT 0,
+  inland_shipping_usd_cents NUMERIC(18, 8) NOT NULL DEFAULT 0,
   round_product_cost_up BOOLEAN NOT NULL DEFAULT TRUE,
   sale_price_usd_cents INTEGER,
   active BOOLEAN NOT NULL DEFAULT TRUE,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS vento_inventory_transactions (
   product_name TEXT NOT NULL,
   type TEXT NOT NULL CHECK (type IN ('sale', 'restock', 'adjustment')),
   quantity INTEGER NOT NULL,
-  unit_cost_usd_cents INTEGER,
+  unit_cost_usd_cents NUMERIC(18, 8),
   unit_price_usd_cents INTEGER,
   total_cost_usd_cents INTEGER,
   total_revenue_usd_cents INTEGER,
@@ -38,3 +38,8 @@ CREATE TABLE IF NOT EXISTS vento_inventory_transactions (
 
 CREATE INDEX IF NOT EXISTS vento_inventory_transactions_created_idx
   ON vento_inventory_transactions(created_at DESC);
+
+ALTER TABLE vento_inventory_products
+  ALTER COLUMN inland_shipping_usd_cents TYPE NUMERIC(18, 8);
+ALTER TABLE vento_inventory_transactions
+  ALTER COLUMN unit_cost_usd_cents TYPE NUMERIC(18, 8);

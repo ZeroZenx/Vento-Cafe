@@ -4,6 +4,8 @@ import path from "node:path";
 import { Pool, type PoolClient } from "pg";
 import { products as catalogProducts } from "@/data/products";
 import type { Product, ProductCategory } from "@/data/products";
+import { calculateProductCost as productCost } from "@/lib/inventory/costing";
+import type { OpeningEntry } from "@/lib/inventory/opening-stock";
 import type {
   InventoryData,
   InventoryProduct,
@@ -35,7 +37,7 @@ CREATE TABLE IF NOT EXISTS vento_inventory_products (
   vat_rate_bps INTEGER NOT NULL DEFAULT 1200,
   exchange_rate NUMERIC(10, 4) NOT NULL DEFAULT 6.8,
   shipping_usd_cents INTEGER NOT NULL DEFAULT 0,
-  inland_shipping_usd_cents INTEGER NOT NULL DEFAULT 0,
+  inland_shipping_usd_cents NUMERIC(18, 8) NOT NULL DEFAULT 0,
   round_product_cost_up BOOLEAN NOT NULL DEFAULT TRUE,
   sale_price_usd_cents INTEGER,
   active BOOLEAN NOT NULL DEFAULT TRUE,
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS vento_inventory_transactions (
   product_name TEXT NOT NULL,
   type TEXT NOT NULL CHECK (type IN ('sale', 'restock', 'adjustment')),
   quantity INTEGER NOT NULL,
-  unit_cost_usd_cents INTEGER,
+  unit_cost_usd_cents NUMERIC(18, 8),
   unit_price_usd_cents INTEGER,
   total_cost_usd_cents INTEGER,
   total_revenue_usd_cents INTEGER,
@@ -58,6 +60,8 @@ CREATE TABLE IF NOT EXISTS vento_inventory_transactions (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 CREATE INDEX IF NOT EXISTS vento_inventory_transactions_created_idx ON vento_inventory_transactions(created_at DESC);
+ALTER TABLE vento_inventory_products ALTER COLUMN inland_shipping_usd_cents TYPE NUMERIC(18, 8);
+ALTER TABLE vento_inventory_transactions ALTER COLUMN unit_cost_usd_cents TYPE NUMERIC(18, 8);
 `;
 
 function now(): string {
@@ -202,19 +206,6 @@ function mapTransactionRow(row: Record<string, unknown>): InventoryTransaction {
   };
 }
 
-function productCost(product: InventoryProduct) {
-  if (product.costTtdCents === null) {
-    return { costWithVatTtdCents: null, exactProductCostUsdCents: null, roundedProductCostUsdCents: null, landedCostUsdCents: null };
-  }
-  const costWithVatTtdCents = Math.round(product.costTtdCents * (10000 + product.vatRateBps) / 10000);
-  const exactProductCostUsdCents = Math.round((costWithVatTtdCents / product.exchangeRate) * 100) / 100;
-  const roundedProductCostUsdCents = product.roundProductCostUp
-    ? Math.ceil(exactProductCostUsdCents / 100) * 100
-    : Math.round(exactProductCostUsdCents);
-  const landedCostUsdCents = roundedProductCostUsdCents + product.shippingUsdCents + product.inlandShippingUsdCents;
-  return { costWithVatTtdCents, exactProductCostUsdCents, roundedProductCostUsdCents, landedCostUsdCents };
-}
-
 function viewProduct(product: InventoryProduct): InventoryProductView {
   const cost = productCost(product);
   return {
@@ -234,7 +225,7 @@ function summary(products: InventoryProduct[], transactions: InventoryTransactio
     productCount: visibleProducts.length,
     unitsInStock: visibleProducts.reduce((total, product) => total + product.stock, 0),
     lowStockCount: visibleProducts.filter((product) => product.stock <= product.lowStockThreshold).length,
-    inventoryValueUsdCents: visibleProducts.reduce((total, product) => total + (productCost(product).landedCostUsdCents || 0) * product.stock, 0),
+    inventoryValueUsdCents: Math.round(visibleProducts.reduce((total, product) => total + (productCost(product).landedCostUsdCents || 0) * product.stock, 0)),
     salesCount: saleTransactions.length,
     unitsSold: saleTransactions.reduce((total, transaction) => total + transaction.quantity, 0),
     revenueUsdCents: saleTransactions.reduce((total, transaction) => total + (transaction.totalRevenueUsdCents || 0), 0),
@@ -385,7 +376,7 @@ export async function recordTransaction(input: { productId: string; type: Invent
       const delta = input.type === "sale" ? -input.quantity : input.quantity;
       if (product.stock + delta < 0) throw new Error("Not enough stock for this sale");
       if (input.type === "sale" && price === null) throw new Error("Set a sale price before recording a sale");
-      const totalCost = cost === null ? null : cost * input.quantity;
+      const totalCost = cost === null ? null : Math.round(cost * input.quantity);
       const totalRevenue = input.type === "sale" && price !== null ? price * input.quantity : null;
       const profit = totalRevenue === null || totalCost === null ? null : totalRevenue - totalCost;
       const transaction = {
@@ -417,7 +408,7 @@ export async function recordTransaction(input: { productId: string; type: Invent
   const delta = input.type === "sale" ? -input.quantity : input.quantity;
   if (product.stock + delta < 0) throw new Error("Not enough stock for this sale");
   if (input.type === "sale" && price === null) throw new Error("Set a sale price before recording a sale");
-  const totalCost = cost === null ? null : cost * input.quantity;
+  const totalCost = cost === null ? null : Math.round(cost * input.quantity);
   const totalRevenue = input.type === "sale" && price !== null ? price * input.quantity : null;
   const transaction: InventoryTransaction = {
     id: randomUUID(), productId: product.id, productName: product.nameEn, type: input.type, quantity: input.quantity,
@@ -434,6 +425,56 @@ export async function recordTransaction(input: { productId: string; type: Invent
 
 export function calculateProductCost(product: InventoryProduct) {
   return productCost(product);
+}
+
+export async function importOpeningStock(entries: OpeningEntry[]): Promise<number> {
+  if (!hasDatabaseConnection()) {
+    if (process.env.NODE_ENV === "production") throw new Error("DATABASE_URL is required for hosted inventory persistence");
+    const state = await readLocalState();
+    let imported = 0;
+    for (const { product, transaction } of entries) {
+      if (state.transactions.some(t => t.id === transaction.id)) continue;
+      const current = state.products.find(p => p.id === product.id);
+      if (current && (current.stock !== 0 || current.costTtdCents !== null || state.transactions.some(t => t.productId === current.id))) throw new Error("Existing activity prevents opening stock replacement: " + product.id);
+      if (current) Object.assign(current, product, { createdAt: current.createdAt });
+      else state.products.push(product);
+      state.transactions.push(transaction);
+      imported += product.stock;
+    }
+    await writeLocalState(state);
+    return imported;
+  }
+  await ensureDatabase();
+  const client = await getPool().connect();
+  try {
+    await client.query("BEGIN");
+    await client.query("SELECT pg_advisory_xact_lock(hashtext($1))", ["vento-opening-stock"]);
+    let imported = 0;
+    for (const { product: p, transaction: t } of entries) {
+      const prior = await client.query("SELECT id FROM vento_inventory_transactions WHERE id=$1", [t.id]);
+      if (prior.rowCount) continue;
+      const current = await client.query("SELECT stock,cost_ttd_cents FROM vento_inventory_products WHERE id=$1 FOR UPDATE", [p.id]);
+      if (current.rowCount) {
+        const activity = await client.query("SELECT 1 FROM vento_inventory_transactions WHERE product_id=$1 LIMIT 1", [p.id]);
+        if (Number(current.rows[0].stock) !== 0 || current.rows[0].cost_ttd_cents !== null || activity.rowCount) throw new Error("Existing activity prevents opening stock replacement: " + p.id);
+      }
+      await client.query(`INSERT INTO vento_inventory_products
+        (id,name_es,name_en,category,image,description_es,description_en,stock,low_stock_threshold,cost_ttd_cents,vat_rate_bps,exchange_rate,shipping_usd_cents,inland_shipping_usd_cents,round_product_cost_up,sale_price_usd_cents,active,public_visible,created_at,updated_at)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,TRUE,$17,$18,$18)
+        ON CONFLICT (id) DO UPDATE SET stock=EXCLUDED.stock,cost_ttd_cents=EXCLUDED.cost_ttd_cents,vat_rate_bps=EXCLUDED.vat_rate_bps,exchange_rate=EXCLUDED.exchange_rate,shipping_usd_cents=EXCLUDED.shipping_usd_cents,inland_shipping_usd_cents=EXCLUDED.inland_shipping_usd_cents,round_product_cost_up=EXCLUDED.round_product_cost_up,sale_price_usd_cents=EXCLUDED.sale_price_usd_cents,updated_at=EXCLUDED.updated_at`,
+        [p.id,p.nameEs,p.nameEn,p.category,p.image,p.descriptionEs,p.descriptionEn,p.stock,p.lowStockThreshold,p.costTtdCents,p.vatRateBps,p.exchangeRate,p.shippingUsdCents,p.inlandShippingUsdCents,p.roundProductCostUp,p.salePriceUsdCents,p.publicVisible,p.createdAt]);
+      await client.query(`INSERT INTO vento_inventory_transactions
+        (id,product_id,product_name,type,quantity,unit_cost_usd_cents,unit_price_usd_cents,total_cost_usd_cents,total_revenue_usd_cents,profit_usd_cents,note,created_at)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+        [t.id,t.productId,t.productName,t.type,t.quantity,t.unitCostUsdCents,t.unitPriceUsdCents,t.totalCostUsdCents,t.totalRevenueUsdCents,t.profitUsdCents,t.note,t.createdAt]);
+      imported += p.stock;
+    }
+    await client.query("COMMIT");
+    return imported;
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally { client.release(); }
 }
 
 export type { PoolClient };

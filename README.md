@@ -105,3 +105,18 @@ The private workspace calculates:
 - Inventory value, sales revenue, cost of goods, and gross profit
 
 Use stock movements for sales, restocks, and adjustments. Product edits preserve the product record while movement entries provide the sales history.
+
+## Opening Stock Import
+
+Keep shipment source JSON in ignored `.data/opening-stock.json`. Never commit supplier invoices, costs, or credentials. Run the importer with Node.js 22.18 or later:
+
+```bash
+node scripts/import-opening-stock.mjs --dry-run --local
+node scripts/import-opening-stock.mjs --local
+node scripts/import-opening-stock.mjs --remote https://vento-cafe.vercel.app
+node --test tests/inventory-costing.test.mjs
+```
+
+The remote import signs in with the private `VENTO_ADMIN_PASSWORD` from the environment. Production requires `DATABASE_URL`. The protected import checks each product, preserves existing activity, and uses deterministic opening transaction IDs to prevent duplicate inventory. PostgreSQL imports run in one transaction.
+
+Each shipment keeps its own VAT, exchange-rate and rounding rules. Inland transport allocation preserves fractional cents per unit and rounds totals only after summing. Individual bottles and bundles use separate inventory records so a paired product photo does not double-count stock.
