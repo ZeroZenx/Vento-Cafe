@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { FloatingActions } from "@/components/FloatingActions";
 import { Footer } from "@/components/Footer";
@@ -8,6 +8,19 @@ import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.websiteUrl),
+  applicationName: siteConfig.name,
+  icons: {
+    icon: [
+      { url: "/icons/vento-32-v1.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/vento-192-v1.png", sizes: "192x192", type: "image/png" }
+    ],
+    apple: [{ url: "/icons/vento-apple-touch-v1.png", sizes: "180x180", type: "image/png" }]
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Vento",
+    statusBarStyle: "default"
+  },
   title: {
     default: "Vento Café & Market | Products in Los Guayos, Carabobo",
     template: "%s | Vento Café & Market"
@@ -50,6 +63,10 @@ export const metadata: Metadata = {
     "title:es": "Vento Café & Market | Café y productos en Los Guayos, Carabobo",
     "description:es": siteConfig.description
   }
+};
+
+export const viewport: Viewport = {
+  themeColor: "#204536"
 };
 
 const localBusinessSchema = {
