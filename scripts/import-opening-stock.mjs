@@ -8,6 +8,7 @@ import { calculateProductCost } from "../lib/inventory/costing.ts";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
+const reconcile = args.includes("--reconcile-costs");
 const local = args.includes("--local");
 const remoteIndex = args.indexOf("--remote");
 const remote = remoteIndex >= 0 ? args[remoteIndex + 1] : null;
@@ -54,10 +55,10 @@ for (const shipment of source.shipments) {
     };
     assert(product.nameEs && product.nameEn && product.image, "Product name and image required");
     assert(["coffee", "hair", "body", "lotions", "household"].includes(product.category), "Invalid category");
-    assert(product.image.startsWith("/products/"), "Local catalog image required");
+    assert(product.image.startsWith("/products/") || product.image.startsWith("/brand/"), "Local catalog image required");
     await readFile(path.join("public", product.image));
     Object.assign(product, {
-      stock: item.quantity, costTtdCents: item.costTtdCents, vatRateBps: shipment.vatRateBps,
+      stock: item.quantity, costTtdCents: item.costTtdCents, costUnits: item.costUnits ?? 1, vatRateBps: shipment.vatRateBps,
       exchangeRate: shipment.exchangeRate, roundProductCostUp: shipment.roundProductCostUp,
       shippingUsdCents: shipment.shippingPerUnitUsdCents,
       inlandShippingUsdCents: shipment.inlandShippingTotalUsdCents / unitCount,
@@ -68,14 +69,14 @@ for (const shipment of source.shipments) {
       id: `opening-${shipment.reference}-${item.id}`, productId: product.id, productName: product.nameEn,
       type: "restock", quantity: item.quantity, unitCostUsdCents: unitCost, unitPriceUsdCents: null,
       totalCostUsdCents: Math.round(unitCost * item.quantity), totalRevenueUsdCents: null, profitUsdCents: null,
-      note: `Opening stock: ${shipment.reference}; ${shipment.source}`, createdAt: timestamp
+      note: `Opening stock: ${shipment.reference}; ${shipment.source}${shipment.transportSource ? "; " + shipment.transportSource : ""}`, createdAt: timestamp
     };
     entries.push({ product, transaction });
-    supplierCents += item.costTtdCents * item.quantity;
+    supplierCents += item.costTtdCents / (item.costUnits ?? 1) * item.quantity;
     landedCents += unitCost * item.quantity;
     salesCents += item.salePriceUsdCents * item.quantity;
   }
-  assert.equal(supplierCents, shipment.expectedSupplierTtdCents, "Supplier subtotal mismatch");
+  assert.equal(Math.round(supplierCents), shipment.expectedSupplierTtdCents, "Supplier subtotal mismatch");
   assert.equal(Math.round(landedCents), shipment.expectedLandedUsdCents, "Landed cost mismatch");
   assert.equal(salesCents, shipment.expectedSalesUsdCents, "Retail total mismatch");
   totals.push({ reference: shipment.reference, units: unitCount, landedUsdCents: Math.round(landedCents), salesUsdCents: salesCents });
@@ -93,10 +94,10 @@ if (remote) {
   const cookie = login.headers.get("set-cookie")?.split(";")[0];
   assert(cookie, "Admin session required");
   try {
-    const response = await fetch(new URL("/api/admin/opening-stock", url), { method: "POST", headers: { "Content-Type": "application/json", Cookie: cookie }, body: JSON.stringify({ entries }) });
+    const response = await fetch(new URL("/api/admin/opening-stock", url), { method: reconcile ? "PATCH" : "POST", headers: { "Content-Type": "application/json", Cookie: cookie }, body: JSON.stringify({ entries }) });
     const result = await response.json();
     assert.equal(response.status, 200, result.error || "Remote import failed");
-    console.log("Opening units imported remotely: " + result.importedUnits);
+    console.log(reconcile ? "Opening product costs corrected: " + result.correctedProducts : "Opening units imported remotely: " + result.importedUnits);
   } finally {
     await fetch(new URL("/api/admin/logout", url), { method: "POST", headers: { Cookie: cookie } });
   }
@@ -141,10 +142,10 @@ if (remote) {
         assert(Number(current.rows[0].stock) === 0 && current.rows[0].cost_ttd_cents === null && activity.rowCount === 0, "Existing activity prevents opening-stock replacement: " + p.id);
       }
       await client.query(`INSERT INTO vento_inventory_products
-        (id,name_es,name_en,category,image,description_es,description_en,stock,low_stock_threshold,cost_ttd_cents,vat_rate_bps,exchange_rate,shipping_usd_cents,inland_shipping_usd_cents,round_product_cost_up,sale_price_usd_cents,active,public_visible,created_at,updated_at)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$19)
-        ON CONFLICT (id) DO UPDATE SET stock=EXCLUDED.stock,cost_ttd_cents=EXCLUDED.cost_ttd_cents,vat_rate_bps=EXCLUDED.vat_rate_bps,exchange_rate=EXCLUDED.exchange_rate,shipping_usd_cents=EXCLUDED.shipping_usd_cents,inland_shipping_usd_cents=EXCLUDED.inland_shipping_usd_cents,round_product_cost_up=EXCLUDED.round_product_cost_up,sale_price_usd_cents=EXCLUDED.sale_price_usd_cents,updated_at=EXCLUDED.updated_at`,
-        [p.id,p.nameEs,p.nameEn,p.category,p.image,p.descriptionEs,p.descriptionEn,p.stock,p.lowStockThreshold,p.costTtdCents,p.vatRateBps,p.exchangeRate,p.shippingUsdCents,p.inlandShippingUsdCents,p.roundProductCostUp,p.salePriceUsdCents,p.active,p.publicVisible,p.createdAt]);
+        (id,name_es,name_en,category,image,description_es,description_en,stock,low_stock_threshold,cost_ttd_cents,vat_rate_bps,exchange_rate,shipping_usd_cents,inland_shipping_usd_cents,round_product_cost_up,sale_price_usd_cents,active,public_visible,created_at,updated_at,cost_units)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$19,$20)
+        ON CONFLICT (id) DO UPDATE SET stock=EXCLUDED.stock,cost_ttd_cents=EXCLUDED.cost_ttd_cents,vat_rate_bps=EXCLUDED.vat_rate_bps,exchange_rate=EXCLUDED.exchange_rate,shipping_usd_cents=EXCLUDED.shipping_usd_cents,inland_shipping_usd_cents=EXCLUDED.inland_shipping_usd_cents,round_product_cost_up=EXCLUDED.round_product_cost_up,sale_price_usd_cents=EXCLUDED.sale_price_usd_cents,cost_units=EXCLUDED.cost_units,updated_at=EXCLUDED.updated_at`,
+        [p.id,p.nameEs,p.nameEn,p.category,p.image,p.descriptionEs,p.descriptionEn,p.stock,p.lowStockThreshold,p.costTtdCents,p.vatRateBps,p.exchangeRate,p.shippingUsdCents,p.inlandShippingUsdCents,p.roundProductCostUp,p.salePriceUsdCents,p.active,p.publicVisible,p.createdAt,p.costUnits ?? 1]);
       await client.query(`INSERT INTO vento_inventory_transactions
         (id,product_id,product_name,type,quantity,unit_cost_usd_cents,unit_price_usd_cents,total_cost_usd_cents,total_revenue_usd_cents,profit_usd_cents,note,created_at)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { hasAdminSession } from "@/lib/admin/auth";
 import { archiveProduct, updateProduct } from "@/lib/inventory/store";
+import { allocatedTransportCents } from "@/lib/inventory/money";
 import type { ProductCategory } from "@/data/products";
 import type { UpsertInventoryProductInput } from "@/lib/inventory/types";
 
@@ -27,6 +28,10 @@ function parseInput(body: Record<string, unknown>): UpsertInventoryProductInput 
   const nameEs = String(body.nameEs || "").trim();
   const nameEn = String(body.nameEn || "").trim();
   if (!nameEs || !nameEn) throw new Error("Spanish and English product names are required");
+  const costUnits = wholeNumber(body.costUnits, 1);
+  if (costUnits < 1) throw new Error("Supplier pack quantity must be positive");
+  const exchangeRate = Number(body.exchangeRate ?? 6.8);
+  if (!Number.isFinite(exchangeRate) || exchangeRate <= 0) throw new Error("Exchange rate must be positive");
   return {
     nameEs,
     nameEn,
@@ -37,10 +42,11 @@ function parseInput(body: Record<string, unknown>): UpsertInventoryProductInput 
     stock: wholeNumber(body.stock),
     lowStockThreshold: wholeNumber(body.lowStockThreshold, 2),
     costTtdCents: cents(body.costTtdCents),
+    costUnits,
     vatRateBps: wholeNumber(body.vatRateBps, 1200),
-    exchangeRate: Number(body.exchangeRate || 6.8),
+    exchangeRate,
     shippingUsdCents: cents(body.shippingUsdCents, false) || 0,
-    inlandShippingUsdCents: cents(body.inlandShippingUsdCents, false) || 0,
+    inlandShippingUsdCents: allocatedTransportCents(body.inlandShippingUsdCents ?? 0),
     roundProductCostUp: body.roundProductCostUp !== false,
     salePriceUsdCents: cents(body.salePriceUsdCents),
     publicVisible: body.publicVisible !== false

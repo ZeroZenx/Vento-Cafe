@@ -43,3 +43,16 @@ ALTER TABLE vento_inventory_products
   ALTER COLUMN inland_shipping_usd_cents TYPE NUMERIC(18, 8);
 ALTER TABLE vento_inventory_transactions
   ALTER COLUMN unit_cost_usd_cents TYPE NUMERIC(18, 8);
+
+ALTER TABLE vento_inventory_products
+  ADD COLUMN IF NOT EXISTS cost_units INTEGER NOT NULL DEFAULT 1 CHECK (cost_units > 0);
+
+CREATE TABLE IF NOT EXISTS vento_inventory_cost_corrections (
+  id TEXT PRIMARY KEY,
+  product_id TEXT NOT NULL REFERENCES vento_inventory_products(id),
+  transaction_id TEXT NOT NULL REFERENCES vento_inventory_transactions(id),
+  before_values JSONB NOT NULL,
+  after_values JSONB NOT NULL,
+  reason TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Coffee, Languages, Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) return null;
   const navLinks = [
     { label: t.nav.coffee, href: "/products", primary: true },
     { label: t.nav.story, href: "/our-story", primary: false },

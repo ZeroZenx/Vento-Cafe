@@ -14,7 +14,9 @@ export function validateOpeningEntries(value: unknown): OpeningEntry[] {
     if (!t.id.startsWith("opening-") || !/^[a-z0-9-]+$/.test(t.id) || t.productId !== p.id) throw new Error("Invalid import reference");
     if (!["coffee", "hair", "body", "lotions", "household"].includes(p.category)) throw new Error("Invalid category");
     if (![p.nameEs, p.nameEn, p.image].every(v => typeof v === "string" && v.length > 0 && v.length < 1000)) throw new Error("Product names and image required");
-    if (!p.image.startsWith("/products/") || p.image.includes("..")) throw new Error("Local catalog image required");
+    if ((!p.image.startsWith("/products/") && !p.image.startsWith("/brand/")) || p.image.includes("..")) throw new Error("Local catalog image required");
+    const costUnits = p.costUnits ?? 1;
+    if (!Number.isSafeInteger(costUnits) || costUnits < 1) throw new Error("Invalid supplier pack quantity");
     for (const n of [p.stock, p.costTtdCents, p.vatRateBps, p.shippingUsdCents, p.salePriceUsdCents, p.lowStockThreshold]) {
       if (!Number.isSafeInteger(n) || n === null || n < 0) throw new Error("Invalid quantity or cost");
     }
@@ -23,7 +25,7 @@ export function validateOpeningEntries(value: unknown): OpeningEntry[] {
     const unitCost = calculateProductCost(p).landedCostUsdCents;
     const timestamp = new Date().toISOString();
     return {
-      product: { ...p, active: true, createdAt: timestamp, updatedAt: timestamp },
+      product: { ...p, costUnits, active: true, createdAt: timestamp, updatedAt: timestamp },
       transaction: {
         id: t.id, productId: p.id, productName: p.nameEn, type: "restock", quantity: p.stock,
         unitCostUsdCents: unitCost, unitPriceUsdCents: null,

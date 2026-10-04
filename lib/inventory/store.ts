@@ -6,6 +6,7 @@ import { products as catalogProducts } from "@/data/products";
 import type { Product, ProductCategory } from "@/data/products";
 import { calculateProductCost as productCost } from "@/lib/inventory/costing";
 import type { OpeningEntry } from "@/lib/inventory/opening-stock";
+import { validateOpeningCostCorrection } from "@/lib/inventory/corrections";
 import type {
   InventoryData,
   InventoryProduct,
@@ -16,7 +17,8 @@ import type {
   UpsertInventoryProductInput
 } from "@/lib/inventory/types";
 
-type LocalState = { products: InventoryProduct[]; transactions: InventoryTransaction[] };
+type CostCorrection = { productId: string; transactionId: string; before: unknown; after: unknown; reason: string; createdAt: string };
+type LocalState = { products: InventoryProduct[]; transactions: InventoryTransaction[]; costCorrections?: CostCorrection[] };
 
 const localPath = process.env.VENTO_INVENTORY_FILE || path.join(process.cwd(), ".data", "inventory.json");
 let pool: Pool | null = null;
@@ -62,6 +64,16 @@ CREATE TABLE IF NOT EXISTS vento_inventory_transactions (
 CREATE INDEX IF NOT EXISTS vento_inventory_transactions_created_idx ON vento_inventory_transactions(created_at DESC);
 ALTER TABLE vento_inventory_products ALTER COLUMN inland_shipping_usd_cents TYPE NUMERIC(18, 8);
 ALTER TABLE vento_inventory_transactions ALTER COLUMN unit_cost_usd_cents TYPE NUMERIC(18, 8);
+ALTER TABLE vento_inventory_products ADD COLUMN IF NOT EXISTS cost_units INTEGER NOT NULL DEFAULT 1 CHECK (cost_units > 0);
+CREATE TABLE IF NOT EXISTS vento_inventory_cost_corrections (
+  id TEXT PRIMARY KEY,
+  product_id TEXT NOT NULL REFERENCES vento_inventory_products(id),
+  transaction_id TEXT NOT NULL REFERENCES vento_inventory_transactions(id),
+  before_values JSONB NOT NULL,
+  after_values JSONB NOT NULL,
+  reason TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 `;
 
 function now(): string {
@@ -176,6 +188,7 @@ function mapProductRow(row: Record<string, unknown>): InventoryProduct {
     stock: Number(row.stock),
     lowStockThreshold: Number(row.low_stock_threshold),
     costTtdCents: row.cost_ttd_cents === null ? null : Number(row.cost_ttd_cents),
+    costUnits: Number(row.cost_units ?? 1),
     vatRateBps: Number(row.vat_rate_bps),
     exchangeRate: Number(row.exchange_rate),
     shippingUsdCents: Number(row.shipping_usd_cents),
@@ -310,10 +323,10 @@ export async function createProduct(input: UpsertInventoryProductInput): Promise
     await ensureDatabase();
     const result = await getPool().query(
       `INSERT INTO vento_inventory_products
-        (id,name_es,name_en,category,image,description_es,description_en,stock,low_stock_threshold,cost_ttd_cents,vat_rate_bps,exchange_rate,shipping_usd_cents,inland_shipping_usd_cents,round_product_cost_up,sale_price_usd_cents,active,public_visible,created_at,updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,TRUE,$17,$18,$18)
+        (id,name_es,name_en,category,image,description_es,description_en,stock,low_stock_threshold,cost_ttd_cents,vat_rate_bps,exchange_rate,shipping_usd_cents,inland_shipping_usd_cents,round_product_cost_up,sale_price_usd_cents,active,public_visible,created_at,updated_at,cost_units)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,TRUE,$17,$18,$18,$19)
        RETURNING *`,
-      [product.id, product.nameEs, product.nameEn, product.category, product.image, product.descriptionEs, product.descriptionEn, product.stock, product.lowStockThreshold, product.costTtdCents, product.vatRateBps, product.exchangeRate, product.shippingUsdCents, product.inlandShippingUsdCents, product.roundProductCostUp, product.salePriceUsdCents, product.publicVisible, timestamp]
+      [product.id, product.nameEs, product.nameEn, product.category, product.image, product.descriptionEs, product.descriptionEn, product.stock, product.lowStockThreshold, product.costTtdCents, product.vatRateBps, product.exchangeRate, product.shippingUsdCents, product.inlandShippingUsdCents, product.roundProductCostUp, product.salePriceUsdCents, product.publicVisible, timestamp, product.costUnits ?? 1]
     );
     return mapProductRow(result.rows[0]);
   }
@@ -328,8 +341,8 @@ export async function updateProduct(id: string, input: UpsertInventoryProductInp
   if (hasDatabaseConnection()) {
     await ensureDatabase();
     const result = await getPool().query(
-      `UPDATE vento_inventory_products SET name_es=$2,name_en=$3,category=$4,image=$5,description_es=$6,description_en=$7,stock=$8,low_stock_threshold=$9,cost_ttd_cents=$10,vat_rate_bps=$11,exchange_rate=$12,shipping_usd_cents=$13,inland_shipping_usd_cents=$14,round_product_cost_up=$15,sale_price_usd_cents=$16,public_visible=$17,updated_at=$18 WHERE id=$1 RETURNING *`,
-      [id, input.nameEs, input.nameEn, input.category, input.image, input.descriptionEs, input.descriptionEn, input.stock, input.lowStockThreshold, input.costTtdCents, input.vatRateBps, input.exchangeRate, input.shippingUsdCents, input.inlandShippingUsdCents, input.roundProductCostUp, input.salePriceUsdCents, input.publicVisible, timestamp]
+      `UPDATE vento_inventory_products SET name_es=$2,name_en=$3,category=$4,image=$5,description_es=$6,description_en=$7,low_stock_threshold=$8,cost_ttd_cents=$9,vat_rate_bps=$10,exchange_rate=$11,shipping_usd_cents=$12,inland_shipping_usd_cents=$13,round_product_cost_up=$14,sale_price_usd_cents=$15,public_visible=$16,updated_at=$17,cost_units=$18 WHERE id=$1 RETURNING *`,
+      [id, input.nameEs, input.nameEn, input.category, input.image, input.descriptionEs, input.descriptionEn, input.lowStockThreshold, input.costTtdCents, input.vatRateBps, input.exchangeRate, input.shippingUsdCents, input.inlandShippingUsdCents, input.roundProductCostUp, input.salePriceUsdCents, input.publicVisible, timestamp, input.costUnits ?? 1]
     );
     if (!result.rows[0]) throw new Error("Product not found");
     return mapProductRow(result.rows[0]);
@@ -338,7 +351,7 @@ export async function updateProduct(id: string, input: UpsertInventoryProductInp
   const index = state.products.findIndex((product) => product.id === id);
   if (index === -1) throw new Error("Product not found");
   const current = state.products[index];
-  const updated = { ...current, ...input, id, createdAt: current.createdAt, updatedAt: timestamp };
+  const updated = { ...current, ...input, id, stock: current.stock, createdAt: current.createdAt, updatedAt: timestamp };
   state.products[index] = updated;
   await writeLocalState(state);
   return updated;
@@ -459,10 +472,10 @@ export async function importOpeningStock(entries: OpeningEntry[]): Promise<numbe
         if (Number(current.rows[0].stock) !== 0 || current.rows[0].cost_ttd_cents !== null || activity.rowCount) throw new Error("Existing activity prevents opening stock replacement: " + p.id);
       }
       await client.query(`INSERT INTO vento_inventory_products
-        (id,name_es,name_en,category,image,description_es,description_en,stock,low_stock_threshold,cost_ttd_cents,vat_rate_bps,exchange_rate,shipping_usd_cents,inland_shipping_usd_cents,round_product_cost_up,sale_price_usd_cents,active,public_visible,created_at,updated_at)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,TRUE,$17,$18,$18)
-        ON CONFLICT (id) DO UPDATE SET stock=EXCLUDED.stock,cost_ttd_cents=EXCLUDED.cost_ttd_cents,vat_rate_bps=EXCLUDED.vat_rate_bps,exchange_rate=EXCLUDED.exchange_rate,shipping_usd_cents=EXCLUDED.shipping_usd_cents,inland_shipping_usd_cents=EXCLUDED.inland_shipping_usd_cents,round_product_cost_up=EXCLUDED.round_product_cost_up,sale_price_usd_cents=EXCLUDED.sale_price_usd_cents,updated_at=EXCLUDED.updated_at`,
-        [p.id,p.nameEs,p.nameEn,p.category,p.image,p.descriptionEs,p.descriptionEn,p.stock,p.lowStockThreshold,p.costTtdCents,p.vatRateBps,p.exchangeRate,p.shippingUsdCents,p.inlandShippingUsdCents,p.roundProductCostUp,p.salePriceUsdCents,p.publicVisible,p.createdAt]);
+        (id,name_es,name_en,category,image,description_es,description_en,stock,low_stock_threshold,cost_ttd_cents,vat_rate_bps,exchange_rate,shipping_usd_cents,inland_shipping_usd_cents,round_product_cost_up,sale_price_usd_cents,active,public_visible,created_at,updated_at,cost_units)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,TRUE,$17,$18,$18,$19)
+        ON CONFLICT (id) DO UPDATE SET stock=EXCLUDED.stock,cost_ttd_cents=EXCLUDED.cost_ttd_cents,vat_rate_bps=EXCLUDED.vat_rate_bps,exchange_rate=EXCLUDED.exchange_rate,shipping_usd_cents=EXCLUDED.shipping_usd_cents,inland_shipping_usd_cents=EXCLUDED.inland_shipping_usd_cents,round_product_cost_up=EXCLUDED.round_product_cost_up,sale_price_usd_cents=EXCLUDED.sale_price_usd_cents,cost_units=EXCLUDED.cost_units,updated_at=EXCLUDED.updated_at`,
+        [p.id,p.nameEs,p.nameEn,p.category,p.image,p.descriptionEs,p.descriptionEn,p.stock,p.lowStockThreshold,p.costTtdCents,p.vatRateBps,p.exchangeRate,p.shippingUsdCents,p.inlandShippingUsdCents,p.roundProductCostUp,p.salePriceUsdCents,p.publicVisible,p.createdAt,p.costUnits ?? 1]);
       await client.query(`INSERT INTO vento_inventory_transactions
         (id,product_id,product_name,type,quantity,unit_cost_usd_cents,unit_price_usd_cents,total_cost_usd_cents,total_revenue_usd_cents,profit_usd_cents,note,created_at)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
@@ -475,6 +488,55 @@ export async function importOpeningStock(entries: OpeningEntry[]): Promise<numbe
     await client.query("ROLLBACK");
     throw error;
   } finally { client.release(); }
+}
+
+export async function reconcileOpeningCosts(entries: OpeningEntry[]): Promise<number> {
+  const fields = (p: InventoryProduct) => ({ shippingUsdCents: p.shippingUsdCents, inlandShippingUsdCents: p.inlandShippingUsdCents });
+  const correctionFor = (p: InventoryProduct, t: InventoryTransaction, entry: OpeningEntry): CostCorrection => ({
+    productId: p.id, transactionId: t.id,
+    before: { ...fields(p), unitCostUsdCents: t.unitCostUsdCents, totalCostUsdCents: t.totalCostUsdCents },
+    after: { ...fields(entry.product), unitCostUsdCents: entry.transaction.unitCostUsdCents, totalCostUsdCents: entry.transaction.totalCostUsdCents },
+    reason: entry.transaction.note, createdAt: now()
+  });
+  if (hasDatabaseConnection()) {
+    await ensureDatabase();
+    const client = await getPool().connect();
+    try {
+      await client.query("BEGIN");
+      await client.query("SELECT pg_advisory_xact_lock(hashtext($1))", ["vento-opening-stock"]);
+      let corrected = 0;
+      for (const entry of entries) {
+        const result = await client.query("SELECT * FROM vento_inventory_products WHERE id=$1 FOR UPDATE", [entry.product.id]);
+        if (!result.rows[0]) throw new Error("Opening product not found");
+        const product = mapProductRow(result.rows[0]);
+        const activity = await client.query("SELECT * FROM vento_inventory_transactions WHERE product_id=$1 FOR UPDATE", [product.id]);
+        const opening = validateOpeningCostCorrection(product, activity.rows.map(mapTransactionRow), entry);
+        if (product.shippingUsdCents === entry.product.shippingUsdCents && Math.abs(product.inlandShippingUsdCents - entry.product.inlandShippingUsdCents) < 0.00000001) continue;
+        const correction = correctionFor(product, opening, entry);
+        await client.query("INSERT INTO vento_inventory_cost_corrections (id,product_id,transaction_id,before_values,after_values,reason) VALUES ($1,$2,$3,$4,$5,$6)", [randomUUID(), product.id, opening.id, JSON.stringify(correction.before), JSON.stringify(correction.after), correction.reason]);
+        await client.query("UPDATE vento_inventory_products SET shipping_usd_cents=$2,inland_shipping_usd_cents=$3,updated_at=NOW() WHERE id=$1", [product.id, entry.product.shippingUsdCents, entry.product.inlandShippingUsdCents]);
+        await client.query("UPDATE vento_inventory_transactions SET unit_cost_usd_cents=$2,total_cost_usd_cents=$3,note=$4 WHERE id=$1", [opening.id, entry.transaction.unitCostUsdCents, entry.transaction.totalCostUsdCents, entry.transaction.note]);
+        corrected += 1;
+      }
+      await client.query("COMMIT");
+      return corrected;
+    } catch (error) { await client.query("ROLLBACK"); throw error; }
+    finally { client.release(); }
+  }
+  const state = await readLocalState();
+  let corrected = 0;
+  for (const entry of entries) {
+    const product = state.products.find(p => p.id === entry.product.id);
+    if (!product) throw new Error("Opening product not found");
+    const opening = validateOpeningCostCorrection(product, state.transactions.filter(t => t.productId === product.id), entry);
+    if (product.shippingUsdCents === entry.product.shippingUsdCents && Math.abs(product.inlandShippingUsdCents - entry.product.inlandShippingUsdCents) < 0.00000001) continue;
+    (state.costCorrections ||= []).push(correctionFor(product, opening, entry));
+    Object.assign(product, fields(entry.product), { updatedAt: now() });
+    Object.assign(opening, { unitCostUsdCents: entry.transaction.unitCostUsdCents, totalCostUsdCents: entry.transaction.totalCostUsdCents, note: entry.transaction.note });
+    corrected += 1;
+  }
+  await writeLocalState(state);
+  return corrected;
 }
 
 export type { PoolClient };

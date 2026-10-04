@@ -13,6 +13,7 @@ export type InventoryProduct = {
   stock: number;
   lowStockThreshold: number;
   costTtdCents: number | null;
+  costUnits?: number;
   vatRateBps: number;
   exchangeRate: number;
   shippingUsdCents: number;
@@ -78,6 +79,7 @@ export type UpsertInventoryProductInput = {
   stock: number;
   lowStockThreshold: number;
   costTtdCents: number | null;
+  costUnits?: number;
   vatRateBps: number;
   exchangeRate: number;
   shippingUsdCents: number;

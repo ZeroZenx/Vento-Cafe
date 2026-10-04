@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-type SafeImageVariant = "portrait" | "landscape" | "product" | "hero";
+type SafeImageVariant = "portrait" | "landscape" | "product" | "thumbnail" | "hero";
 
 type SafeImageProps = {
   src: string;
@@ -15,6 +15,7 @@ const variantClasses: Record<SafeImageVariant, string> = {
   portrait: "object-contain object-top",
   landscape: "object-cover object-center",
   product: "object-contain object-center p-5 sm:p-7",
+  thumbnail: "object-contain object-center p-1",
   hero: "object-contain object-top"
 };
 
@@ -37,4 +38,3 @@ export function SafeImage({
     />
   );
 }
-

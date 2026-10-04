@@ -88,7 +88,7 @@ Copy `.env.example` to `.env.local` and set:
 
 Open `/admin` to sign in. The public navigation does not expose this route.
 
-The first authenticated inventory request creates the two tables from `db/schema.sql` and seeds the current catalog products with their existing images. New products marked “Show in public catalog” appear on `/products` and the homepage. Cost fields stay private to `/admin`.
+The first authenticated inventory request creates the inventory and cost-correction audit tables from `db/schema.sql` and seeds the current catalog products with their existing images. New products marked “Show in public catalog” appear on `/products` and the homepage. Cost fields stay private to `/admin`.
 
 Without `DATABASE_URL`, development uses `.data/inventory.json`. Production requires PostgreSQL so sales and stock changes persist across deployments.
 
@@ -97,12 +97,16 @@ Without `DATABASE_URL`, development uses `.data/inventory.json`. Production requ
 The private workspace calculates:
 
 - Product cost including VAT from the supplier TT$ cost
+- Supplier multipack cost divided by selling units, with exact fractional unit costs
 - Exact USD product cost at the saved exchange rate
 - Optional rounded-up USD product cost
 - International and inland shipping
 - Landed cost per unit
 - Retail price and gross profit per unit
 - Inventory value, sales revenue, cost of goods, and gross profit
+- Separate projected revenue and profit for the current stock, excluding units without a cost or retail price
+
+The private ES/EN selector translates navigation, product names, forms, accounting labels, login, and common validation errors. The shared language preference also applies to the public storefront.
 
 Use stock movements for sales, restocks, and adjustments. Product edits preserve the product record while movement entries provide the sales history.
 
@@ -114,9 +118,12 @@ Keep shipment source JSON in ignored `.data/opening-stock.json`. Never commit su
 node scripts/import-opening-stock.mjs --dry-run --local
 node scripts/import-opening-stock.mjs --local
 node scripts/import-opening-stock.mjs --remote https://vento-cafe.vercel.app
-node --test tests/inventory-costing.test.mjs
+node --test tests/*.test.mjs
+node tests/inventory-api.mjs
 ```
 
 The remote import signs in with the private `VENTO_ADMIN_PASSWORD` from the environment. Production requires `DATABASE_URL`. The protected import checks each product, preserves existing activity, and uses deterministic opening transaction IDs to prevent duplicate inventory. PostgreSQL imports run in one transaction.
 
 Each shipment keeps its own VAT, exchange-rate and rounding rules. Inland transport allocation preserves fractional cents per unit and rounds totals only after summing. Individual bottles and bundles use separate inventory records so a paired product photo does not double-count stock.
+
+For a corrected transport invoice, validate the private source totals, then run `node scripts/import-opening-stock.mjs --reconcile-costs --remote https://vento-cafe.vercel.app`. The authenticated correction validates original quantities and supplier/retail figures, rejects products with later movements, preserves stock, and stores before/after costs in the private audit table. Repeating the correction does not duplicate charges or stock. Add a new source with `--source PATH` for a separate opening shipment.

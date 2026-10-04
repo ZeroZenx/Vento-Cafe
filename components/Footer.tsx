@@ -10,7 +10,7 @@ export function Footer() {
   const pathname = usePathname();
   const { t } = useLanguage();
 
-  if (pathname === "/pay") return null;
+  if (pathname === "/pay" || pathname === "/admin" || pathname.startsWith("/admin/")) return null;
 
   return (
     <footer className="border-t border-espresso/10 bg-[#efe3d3] pb-24 md:pb-0">

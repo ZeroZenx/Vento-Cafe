@@ -11,7 +11,7 @@ export function FloatingActions() {
   const { t } = useLanguage();
   const whatsappHref = buildWhatsAppUrl(siteConfig.whatsappNumber, t.whatsappOrder);
 
-  if (pathname === "/pay") return null;
+  if (pathname === "/pay" || pathname === "/admin" || pathname.startsWith("/admin/")) return null;
 
   return (
     <>
