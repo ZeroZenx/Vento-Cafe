@@ -437,5 +437,100 @@ export const products: Product[] = [
       en: ["Ask about available units.", "Confirm price on WhatsApp.", "Local delivery."]
     },
     price: "Precio por WhatsApp"
+  },
+  {
+    id: "fruit-tree-cucumber-lotion",
+    category: "lotions",
+    name: { es: "Fruit Tree Loción de Pepino", en: "Fruit Tree Cucumber Hand & Body Lotion" },
+    image: "/products/market/fruit-tree-cucumber-lotion.jpg",
+    description: {
+      es: "Loción Fruit Tree de pepino para manos y cuerpo, con vitamina E y glicerina.",
+      en: "Fruit Tree cucumber hand and body lotion with vitamin E and glycerin."
+    },
+    highlights: {
+      es: ["Pepino", "Vitamina E", "Glicerina", "473 ml"],
+      en: ["Cucumber", "Vitamin E", "Glycerin", "473 ml"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "fruit-tree-kiwi-papaya-lotion",
+    category: "lotions",
+    name: { es: "Fruit Tree Loción de Kiwi y Papaya", en: "Fruit Tree Kiwi Papaya Hand & Body Lotion" },
+    image: "/products/market/fruit-tree-kiwi-papaya-lotion.jpg",
+    description: {
+      es: "Loción Fruit Tree de kiwi y papaya para manos y cuerpo, con vitamina E y glicerina.",
+      en: "Fruit Tree kiwi papaya hand and body lotion with vitamin E and glycerin."
+    },
+    highlights: {
+      es: ["Kiwi", "Papaya", "Vitamina E", "473 ml"],
+      en: ["Kiwi", "Papaya", "Vitamin E", "473 ml"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "body-element-pink-grapefruit-lotion",
+    category: "lotions",
+    name: { es: "Body Element Loción de Toronja Rosada", en: "Body Element Pink Grapefruit Hand & Body Lotion" },
+    image: "/products/market/body-element-pink-grapefruit-lotion.jpg",
+    description: {
+      es: "Loción Body Element de toronja rosada para manos y cuerpo en presentación de 472 ml.",
+      en: "Body Element pink grapefruit hand and body lotion in a 472 ml bottle."
+    },
+    highlights: {
+      es: ["Toronja rosada", "Cuidado corporal", "472 ml"],
+      en: ["Pink grapefruit", "Body care", "472 ml"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "fruit-tree-chelsea-flowers-lotion",
+    category: "lotions",
+    name: { es: "Fruit Tree Loción Chelsea Flowers", en: "Fruit Tree Chelsea Flowers Hand & Body Lotion" },
+    image: "/products/market/fruit-tree-chelsea-flowers-lotion.jpg",
+    description: {
+      es: "Loción Fruit Tree Chelsea Flowers para manos y cuerpo, con vitamina E y glicerina.",
+      en: "Fruit Tree Chelsea Flowers hand and body lotion with vitamin E and glycerin."
+    },
+    highlights: {
+      es: ["Chelsea Flowers", "Vitamina E", "Glicerina", "473 ml"],
+      en: ["Chelsea Flowers", "Vitamin E", "Glycerin", "473 ml"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
+  },
+  {
+    id: "body-element-aloe-vera-lotion",
+    category: "lotions",
+    name: { es: "Body Element Loción de Aloe Vera", en: "Body Element Aloe Vera Hand & Body Lotion" },
+    image: "/products/market/body-element-aloe-vera-lotion.jpg",
+    description: {
+      es: "Loción Body Element de aloe vera para manos y cuerpo en presentación de 473 ml.",
+      en: "Body Element aloe vera hand and body lotion in a 473 ml bottle."
+    },
+    highlights: {
+      es: ["Aloe vera", "Hidratación", "473 ml"],
+      en: ["Aloe vera", "Moisture", "473 ml"]
+    },
+    details: {
+      es: ["Consulta disponibilidad.", "Confirma precio por WhatsApp.", "Entrega local en Los Guayos."],
+      en: ["Ask about availability.", "Confirm price on WhatsApp.", "Local delivery in Los Guayos."]
+    },
+    price: "Precio por WhatsApp"
   }
 ];
